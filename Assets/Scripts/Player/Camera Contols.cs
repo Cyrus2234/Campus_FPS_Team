@@ -48,4 +48,10 @@ public class CameraContols : MonoBehaviour
         transform.parent.Rotate(Vector3.up * mouseX);
 
     }
+
+    void Movement()
+    { 
+        
+    }
+
 }

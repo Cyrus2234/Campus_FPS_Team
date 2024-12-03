@@ -13,16 +13,19 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("----- Stats -----")]
-    [SerializeField][Range(0, 100)] int speed;
-    [SerializeField][Range(0, 100)] int sprintMultiplier;
+    [SerializeField,Range(0, 100)] int speed;
+    [SerializeField,Range(0, 100)] int sprintMultiplier;
 
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpCountMax;
 
-    [SerializeField] int gravity;
+    [SerializeField, Range(0, 100)] float gravity = 9.18f;
 
 
     Vector3 moveDirection;
+    Vector3 moveVelocity;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,13 +35,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveDirection = transform.right * InputManager.Instance.Movement.x
+
+
+        moveDirection = (transform.right * InputManager.Instance.Movement.x)
                         +
-                        transform.forward * InputManager.Instance.Movement.y;
-
-
+                        (transform.forward * InputManager.Instance.Movement.y);
 
         controller.Move(moveDirection * speed * Time.deltaTime);
+
+        moveVelocity.y -= gravity * Time.deltaTime;
+
+        controller.Move(moveVelocity * Time.deltaTime);
     }
 
 
