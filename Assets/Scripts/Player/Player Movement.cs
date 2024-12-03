@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreMask;
 
+    [Seperator]
+
 
     [Header("----- Stats -----")]
     [SerializeField][Range(0, 100)] int speed;
@@ -30,9 +32,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveDirection = transform.right * Input.GetAxis("Horizontal")
+        moveDirection = transform.right * InputManager.Instance.Movement.x
                         +
-                        transform.forward * Input.GetAxis("Vertical");
+                        transform.forward * InputManager.Instance.Movement.y;
+
+
 
         controller.Move(moveDirection * speed * Time.deltaTime);
     }
