@@ -62,11 +62,14 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
-  speed: 10
-  sprintMultiplier: 1
+  speed: 5
+  sprintMod: 2
+  jumpMax: 1
   jumpSpeed: 5
-  jumpCountMax: 2
-  gravity: 3
+  gravity: 15
+  shootDamage: 0
+  shootDistance: 0
+  shootRate: 0
 --- !u!143 &6505869433043591252
 CharacterController:
   m_ObjectHideFlags: 0
