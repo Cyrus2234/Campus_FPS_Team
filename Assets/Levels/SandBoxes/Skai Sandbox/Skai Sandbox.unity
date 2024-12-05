@@ -330,13 +330,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 780228742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39c82a4c0b4d24f4a866b707bdbbc8f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 86c50bb056d597247a5f7bcc0b0779dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 20
-  lockVertMin: 0
-  lockVertMax: 0
-  invertY: 0
+  sensitivity: 407
+  lockVertexMinimum: -90
+  lockVertexMaximum: 90
+  invertYAxis: 0
 --- !u!1 &1152348586
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,18 +482,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1152348586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 085ae24bf1dea2c4bb53b779fee6685b, type: 3}
+  m_Script: {fileID: 11500000, guid: e24af7c5dcbb989429d8a97588cffe8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1152348590}
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
-  speed: 2
-  jumpMax: 2
-  jumpSpeed: 1
-  gravity: 1
-  sprintMod: 1
+  speed: 4
+  sprintMod: 2
+  jumpMax: 1
+  jumpSpeed: 8
+  gravity: 30
   shootDamage: 0
   shootDistance: 0
   shootRate: 0
