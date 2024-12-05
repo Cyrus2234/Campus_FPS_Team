@@ -308,7 +308,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 67819955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24af7c5dcbb989429d8a97588cffe8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a7f4e4c8cfe14e42bb42e0c369c3de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 67819959}
@@ -318,11 +318,11 @@ MonoBehaviour:
   speed: 5
   sprintMod: 2
   jumpMax: 2
-  jumpSpeed: 12
+  jumpSpeed: 10
   gravity: 28
-  shootDamage: 1
-  shootDistance: 24
-  shootRate: 2.5
+  shootDamage: 0
+  shootDistance: 0
+  shootRate: 0
 --- !u!4 &67819961
 Transform:
   m_ObjectHideFlags: 0
