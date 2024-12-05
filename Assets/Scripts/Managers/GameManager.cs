@@ -7,15 +7,21 @@ public class GameManager : MonoBehaviour
     // Member fields
     public static GameManager instance;
 
-    GameObject player;
+    public GameObject player;
+    public PlayerMovement playerScript;
+
     float timeScale;
     bool isPaused;
+
+    int goalCount;
 
     void Awake()
     {
         instance = this;
         timeScale = Time.timeScale;
         player = GameObject.FindWithTag("Player");
+
+        playerScript = player.GetComponent<PlayerMovement>();
     }
 
     void Update()
@@ -49,5 +55,10 @@ public class GameManager : MonoBehaviour
     public void SetPlayer(GameObject player)
     {
         this.player = player;
+    }
+
+    public void updateGameGoal(int scoreToAdd)
+    {
+        goalCount += scoreToAdd;
     }
 }

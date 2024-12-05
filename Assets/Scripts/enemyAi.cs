@@ -32,7 +32,7 @@ public class enemyAi : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = model.material.color;
-        Gamemanager.instance.updateGameGoal(1);
+        GameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class enemyAi : MonoBehaviour, IDamage
     bool canSeePlayer()
     {
 
-        playerDir = Gamemanager.instance.player.transform.position - headPos.position;
+        playerDir = GameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
 
@@ -58,7 +58,7 @@ public class enemyAi : MonoBehaviour, IDamage
             if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
             {
 
-                agent.SetDestination(Gamemanager.instance.player.transform.position);
+                agent.SetDestination(GameManager.instance.player.transform.position);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
@@ -106,7 +106,7 @@ public class enemyAi : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             // I'm Dead
-            Gamemanager.instance.updateGameGoal(-1);
+            GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
