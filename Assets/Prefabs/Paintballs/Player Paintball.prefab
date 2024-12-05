@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 381908577611975744}
   - component: {fileID: 6819104953693674813}
   - component: {fileID: 6977739218359301647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player Paintball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

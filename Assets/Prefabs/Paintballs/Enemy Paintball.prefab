@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2884527114121836671}
   - component: {fileID: 5034098601041162076}
   - component: {fileID: 7527960777628862465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy Paintball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
