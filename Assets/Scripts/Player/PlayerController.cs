@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask ignoreMask;
 
     [Header("----- Stats -----")]
+    [SerializeField][Range(1, 10)] int health;
     [SerializeField][Range(1, 5)] int speed;
     [SerializeField][Range(2, 5)] int sprintMod;
     [SerializeField][Range(1, 3)] int jumpMax;
@@ -24,17 +25,17 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
 
     int jumpCount;
+    int healthOriginal;
 
     bool isShooting;
     bool isSprinting;
 
-    // Start is called before the first frame update
     void Start()
     {
-
+        healthOriginal = health;
+        //updatePlayerUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -65,6 +66,12 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity = Vector3.zero;
         }
+
+        if (Input.GetButton("Fire1") && !isShooting)
+        {
+            StartCoroutine(shoot());
+        }
+
     }
 
     void jump()
@@ -89,5 +96,56 @@ public class PlayerController : MonoBehaviour
             isSprinting = false;
         }
     }
+
+    IEnumerator shoot()
+    {
+        isShooting = true;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
+        {
+            Debug.Log(hit.collider.name);
+            IDamage damage = hit.collider.GetComponent<IDamage>();
+            if (damage != null)
+            {
+                damage.takeDamage(shootDamage);
+            }
+        }
+
+        yield return new WaitForSeconds(shootRate);
+
+        isShooting = false;
+    }
+
+    public void takeDamage(int amount)
+    {
+        health -= amount;
+
+        //updatePlayerUI();
+        //StartCoroutine(flashScreenDamage());
+
+        if (health <= 0)
+        {
+            //GameManager.instance.youLose();
+        }
+    }
+    /*
+    IEnumerator flashScreenDamage()
+    {
+        GameManager.instance.playerDamageScreen.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        GameManager.instance.playerDamageScreen.SetActive(false);
+    }
+    */
+
+    /*
+    public void updatePlayerUI()
+    {
+        GameManager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
+    }
+    */
 
 }
