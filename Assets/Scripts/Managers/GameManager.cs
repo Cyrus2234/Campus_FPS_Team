@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameObject player;
-    public PlayerMovement playerScript;
+    public PlayerController playerScript;
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         timeScale = Time.timeScale;
         player = GameObject.FindWithTag("Player");
 
-        playerScript = player.GetComponent<PlayerMovement>();
+        playerScript = player.GetComponent<PlayerController>();
     }
 
     void Update()
