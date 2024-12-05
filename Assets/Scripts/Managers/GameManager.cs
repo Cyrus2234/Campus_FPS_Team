@@ -7,17 +7,13 @@ public class GameManager : MonoBehaviour
     // Member fields
     public static GameManager instance;
 
-<<<<<<< Updated upstream
     public GameObject player;
     public PlayerMovement playerScript;
-=======
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-
-    GameObject player;
->>>>>>> Stashed changes
 
     float timeScale;
 

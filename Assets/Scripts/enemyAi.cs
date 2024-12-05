@@ -46,11 +46,8 @@ public class enemyAi : MonoBehaviour, IDamage
     bool canSeePlayer()
     {
 
-<<<<<<< Updated upstream
         playerDir = GameManager.instance.player.transform.position - headPos.position;
-=======
         playerDir = GameManager.instance.GetPlayer().transform.position - headPos.position;
->>>>>>> Stashed changes
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
 
@@ -61,12 +58,8 @@ public class enemyAi : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
             {
-
-<<<<<<< Updated upstream
                 agent.SetDestination(GameManager.instance.player.transform.position);
-=======
                 agent.SetDestination(GameManager.instance.GetPlayer().transform.position);
->>>>>>> Stashed changes
 
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
