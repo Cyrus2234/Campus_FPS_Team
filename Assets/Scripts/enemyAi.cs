@@ -46,7 +46,6 @@ public class enemyAi : MonoBehaviour, IDamage
     bool canSeePlayer()
     {
 
-        playerDir = GameManager.instance.player.transform.position - headPos.position;
         playerDir = GameManager.instance.GetPlayer().transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
@@ -58,7 +57,7 @@ public class enemyAi : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
             {
-                agent.SetDestination(GameManager.instance.player.transform.position);
+
                 agent.SetDestination(GameManager.instance.GetPlayer().transform.position);
 
                 if (agent.remainingDistance < agent.stoppingDistance)
@@ -107,7 +106,7 @@ public class enemyAi : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             // I'm Dead
-            GameManager.instance.updateGameGoal(-1);
+            //Gamemanager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
