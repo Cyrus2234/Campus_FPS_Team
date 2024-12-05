@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     // Member fields
     public static GameManager instance;
 
-    public GameObject player;
-    public PlayerController playerScript;
+    GameObject player;
+    public PlayerMovement playerScript;
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
