@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     float timeScale;
 
     bool isPaused;
-    bool isStartMenu;
+    [SerializeField] bool isStartMenu;
 
     int goalCount;
 
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && !isStartMenu)
         {
             if (menuActive == null)
             {
