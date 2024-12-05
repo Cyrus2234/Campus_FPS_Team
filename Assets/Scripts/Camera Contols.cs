@@ -10,7 +10,6 @@ public class CameraContols : MonoBehaviour
     [SerializeField] bool invertYAxis;
 
     float rotationX;
-    float rotationY;
 
     // Start is called before the first frame update
     void Start()
