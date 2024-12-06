@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     // Member fields
     public static GameManager instance;
 
-    GameObject player;
-    public PlayerController playerScript;
-
+    [SerializeField] bool isStartMenu;
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] TMP_Text goalCountText;
+
+    GameObject player;
+    public PlayerController playerScript;
+    public Image playerHPBar;
+    public GameObject playerDamageScreen;
+    bool isPaused;
 
     float timeScale;
-
-    bool isPaused;
-    [SerializeField] bool isStartMenu;
 
     int goalCount;
 
@@ -27,7 +31,6 @@ public class GameManager : MonoBehaviour
         instance = this;
         timeScale = Time.timeScale;
         player = GameObject.FindWithTag("Player");
-
         playerScript = player.GetComponent<PlayerController>();
     }
 
@@ -80,8 +83,23 @@ public class GameManager : MonoBehaviour
         this.player = player;
     }
 
-    public void updateGameGoal(int scoreToAdd)
+    public void updateGameGoal(int amount)
     {
-        goalCount += scoreToAdd;
+        goalCount += amount;
+        goalCountText.text = goalCount.ToString("F0");
+
+        if (goalCount <= 0)
+        {
+            Pause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
     }
+    public void youLose()
+    {
+        Pause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
 }

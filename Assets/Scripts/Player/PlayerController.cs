@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField][Range(15, 40)] int gravity;
 
     [Header("----- Gun Stats -----")]
+    [SerializeField] Transform shootPos;
+    [SerializeField] GameObject bullet;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         healthOriginal = health;
-        //updatePlayerUI();
+        updatePlayerUI();
     }
 
     void Update()
@@ -101,17 +103,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isShooting = true;
 
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
-        {
-            Debug.Log(hit.collider.name);
-            IDamage damage = hit.collider.GetComponent<IDamage>();
-            if (damage != null)
-            {
-                damage.takeDamage(shootDamage);
-            }
-        }
+        Instantiate(bullet, shootPos.position, transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
 
@@ -122,15 +114,15 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         health -= amount;
 
-        //updatePlayerUI();
-        //StartCoroutine(flashScreenDamage());
+        updatePlayerUI();
+        StartCoroutine(flashScreenDamage());
 
         if (health <= 0)
         {
-            //GameManager.instance.youLose();
+            GameManager.instance.youLose();
         }
     }
-    /*
+    
     IEnumerator flashScreenDamage()
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
@@ -139,13 +131,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
         GameManager.instance.playerDamageScreen.SetActive(false);
     }
-    */
+    
 
-    /*
+    
     public void updatePlayerUI()
     {
-        GameManager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
+        GameManager.instance.playerHPBar.fillAmount = (float)health / healthOriginal;
     }
-    */
+    
 
 }
