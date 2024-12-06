@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2705042055772298318}
   - component: {fileID: 6505869433043591252}
   - component: {fileID: 7312192496301284526}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -52,8 +52,8 @@ MonoBehaviour:
   controller: {fileID: 6505869433043591252}
   ignoreMask:
     serializedVersion: 2
-    m_Bits: 0
-  health: 1
+    m_Bits: 8
+  health: 10
   speed: 5
   sprintMod: 2
   jumpMax: 1
