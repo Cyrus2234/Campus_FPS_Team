@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 65314985143683544}
   - component: {fileID: 7167887484171896276}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet DMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rb: {fileID: 7167887484171896276}
-  damageAmount: 1
-  bulletSpeed: 101
+  damageAmount: 3
+  bulletSpeed: 263
   destoryTime: 3
 --- !u!33 &6706598466459814181
 MeshFilter:
