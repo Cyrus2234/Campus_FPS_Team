@@ -21,6 +21,8 @@ public class enemyAi : MonoBehaviour, IDamage
 
     Vector3 playerDir;
 
+    private Animator animator;
+
     bool playerInRange;
     bool isShooting;
 
@@ -31,6 +33,7 @@ public class enemyAi : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
        // colorOrig = model.material.color;
        // GameManager.instance.updateGameGoal(1);
     }
@@ -86,6 +89,7 @@ public class enemyAi : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+             animator.SetBool("IsMoving", true);
         }
     }
 
@@ -94,6 +98,7 @@ public class enemyAi : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+        animator.SetBool("IsMoving", false);
         }
     }
 
