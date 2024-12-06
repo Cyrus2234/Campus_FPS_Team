@@ -459,6 +459,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 752503509568884050, guid: 13cfe52e52879a04f88d5e05ca9bfcd7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 752503509568884050, guid: 13cfe52e52879a04f88d5e05ca9bfcd7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 752503509568884050, guid: 13cfe52e52879a04f88d5e05ca9bfcd7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 752503509568884050, guid: 13cfe52e52879a04f88d5e05ca9bfcd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.53232
       objectReference: {fileID: 0}
@@ -760,7 +772,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 7e0043553097dc34e867f52b292bb164, type: 3}
   m_Controller: {fileID: 9100000, guid: 3dbe492b80759cf408d83aed8e7c4d33, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -2371,7 +2383,7 @@ Transform:
   m_GameObject: {fileID: 4899587561744272667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2436,7 +2448,7 @@ MonoBehaviour:
   headPos: {fileID: 4899587561744699669}
   HP: 5
   faceTargetSpeed: 200
-  fov: 90
+  fov: 165
   bullet: {fileID: 8671275209460204849, guid: d3c22f52ff99f3c45ac7dcb68cbd380d, type: 3}
   shootRate: 0.3
 --- !u!4 &4899587561744699711
@@ -2474,7 +2486,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3.64
+  m_Radius: 5.85
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &4899587561744699713
 CapsuleCollider:
