@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         healthOriginal = health;
-        //updatePlayerUI();
+        updatePlayerUI();
     }
 
     void Update()
@@ -122,15 +122,15 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         health -= amount;
 
-        //updatePlayerUI();
-        //StartCoroutine(flashScreenDamage());
+        updatePlayerUI();
+        StartCoroutine(flashScreenDamage());
 
         if (health <= 0)
         {
-            //GameManager.instance.youLose();
+            GameManager.instance.Lose();
         }
     }
-    /*
+    
     IEnumerator flashScreenDamage()
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
@@ -139,13 +139,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
         GameManager.instance.playerDamageScreen.SetActive(false);
     }
-    */
+    
 
-    /*
+    
     public void updatePlayerUI()
     {
-        GameManager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
+        GameManager.instance.playerHPBar.fillAmount = (float)health / healthOriginal;
     }
-    */
+    
 
 }

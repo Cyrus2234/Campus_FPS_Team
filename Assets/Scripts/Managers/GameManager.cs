@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,15 +11,22 @@ public class GameManager : MonoBehaviour
     GameObject player;
     public PlayerController playerScript;
 
+    [Header("----- Menus -----")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
 
+    [Header("----- General UI -----")]
+    public Image playerHPBar;
+
+    public GameObject playerDamageScreen;
+
     float timeScale;
 
+    [Header("----- Bools -----")]
     bool isPaused;
-    [SerializeField] bool isStartMenu;
+    public bool isStartMenu;
 
     int goalCount;
 
@@ -84,4 +92,12 @@ public class GameManager : MonoBehaviour
     {
         goalCount += scoreToAdd;
     }
+
+    public void Lose()
+    {
+        Pause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
 }
