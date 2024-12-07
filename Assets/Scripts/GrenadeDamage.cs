@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class GrenadeDamage : MonoBehaviour
 {
-    [SerializeField] int damageAmount;
-    [SerializeField] int destoryTime;
+    [SerializeField] Rigidbody rb;
+
+    [SerializeField][Range(1, 10)] int damageAmount;
+    [SerializeField][Range(5, 15)] int speed;
+    [SerializeField][Range(5,10)] int destoryTime;
+    [SerializeField][Range(1,10)] int fallRate;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb.velocity = transform.forward * speed;
         StartCoroutine(explode());
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter(Collision collision)
     {
-
+        rb.velocity += Vector3.Reflect(rb.velocity, collision.relativeVelocity.normalized) / (int)(speed * fallRate * .1);
     }
 
     IEnumerator explode()
@@ -28,8 +32,10 @@ public class GrenadeDamage : MonoBehaviour
         foreach (var other in colliders)
         {
             IDamage dmg = other.gameObject.GetComponent<IDamage>();
-            Debug.Log("Is Trigger: " + other.isTrigger + "\tDamage: " + (dmg!=null).ToString() + "\t Collider: " + other);
 
+#if UNITY_EDITOR
+            Debug.Log("Is Trigger: " + other.isTrigger + "\tDamage: " + (dmg != null).ToString() + "\t Collider: " + other);
+#endif
             if (!other.isTrigger && dmg != null && other is CapsuleCollider)
             {
                 //Debug.Log(other.name);
