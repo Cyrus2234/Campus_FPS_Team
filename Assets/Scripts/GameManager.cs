@@ -84,6 +84,11 @@ public class GameManager : MonoBehaviour
         return grenadeCooldown;
     }
 
+    public bool GetPauseState()
+    {
+        return isPaused;
+    }
+
     // Mutators
     public void SetPlayer(GameObject player)
     {

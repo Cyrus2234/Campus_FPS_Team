@@ -72,15 +72,17 @@ public class PlayerController : MonoBehaviour, IDamage
             playerVelocity = Vector3.zero;
         }
 
-        if (Input.GetButton("Fire1") && !isShooting)
+        if (!GameManager.instance.GetPauseState())
         {
-            StartCoroutine(shoot());
+            if (Input.GetButton("Fire1") && !isShooting)
+            {
+                StartCoroutine(shoot());
+            }
+            if (Input.GetButton("Grenade") && !thrownGrenade)
+            {
+                StartCoroutine(throwGrenade());
+            }
         }
-        if (Input.GetButton("Grenade") && !thrownGrenade)
-        {
-            StartCoroutine(throwGrenade());
-        }
-
     }
 
     void jump()
