@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaptureFlagScript : MonoBehaviour
-{
+public class DropOffFlagScript : MonoBehaviour
+{ 
     [SerializeField] string teamTag = "Player";
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(teamTag))
-        { 
-            GameManager.instance.setHasFlagState(true);
-            Destroy(gameObject);
+        {
+            if (GameManager.instance.checkFlagState())
+            {
+                GameManager.instance.updateGameGoal(-1000);//Capturing flag is worth 1000 kills (change)
+                Destroy(gameObject);
+            }
+
         }
     }
 
