@@ -21,14 +21,17 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
 
-    Vector3 moveDirection;
-    Vector3 playerVelocity;
+    [Header("----- Grenade Stats -----")]
+    [SerializeField] Transform throwPos;
+    [SerializeField] GameObject grenade;
+    [SerializeField] float grenadeCooldown;
 
-    int jumpCount;
-    int healthOriginal;
 
-    bool isShooting;
-    bool isSprinting;
+    Vector3 moveDirection, playerVelocity;
+
+    int jumpCount, healthOriginal;
+
+    bool isShooting, thrownGrenade, isSprinting;
 
     void Start()
     {
@@ -38,10 +41,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Update()
     {
-
         movement();
         sprint();
-
     }
 
     void movement()
@@ -70,6 +71,10 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButton("Fire1") && !isShooting)
         {
             StartCoroutine(shoot());
+        }
+        if (Input.GetButton("Grenade") && !thrownGrenade)
+        {
+            StartCoroutine(throwGrenade());
         }
 
     }
@@ -118,6 +123,18 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+    IEnumerator throwGrenade()
+    {
+        thrownGrenade = true;
+
+        GameObject projectileGrenade = Instantiate(grenade, throwPos.position, transform.rotation);
+        projectileGrenade.GetComponent<Rigidbody>().velocity = playerVelocity;
+
+        yield return new WaitForSeconds(grenadeCooldown);
+
+        thrownGrenade = false;
+    }
+
     public void takeDamage(int amount)
     {
         health -= amount;
@@ -130,7 +147,11 @@ public class PlayerController : MonoBehaviour, IDamage
             //GameManager.instance.youLose();
         }
     }
+<<<<<<< feature/grenade
     /*
+=======
+
+>>>>>>> local
     IEnumerator flashScreenDamage()
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
@@ -139,13 +160,20 @@ public class PlayerController : MonoBehaviour, IDamage
 
         GameManager.instance.playerDamageScreen.SetActive(false);
     }
+<<<<<<< feature/grenade
     */
 
     /*
+=======
+
+>>>>>>> local
     public void updatePlayerUI()
     {
         GameManager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
     }
+<<<<<<< feature/grenade
     */
 
+=======
+>>>>>>> local
 }
