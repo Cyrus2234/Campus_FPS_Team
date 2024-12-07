@@ -1036,7 +1036,7 @@ MonoBehaviour:
   health: 10
   speed: 3
   sprintMod: 2
-  jumpMax: 2
+  jumpMax: 1
   jumpSpeed: 10
   gravity: 27
   shootPos: {fileID: 213887478434251449}
