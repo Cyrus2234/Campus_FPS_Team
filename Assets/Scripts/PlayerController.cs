@@ -22,14 +22,19 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
-    Vector3 moveDirection;
-    Vector3 playerVelocity;
+    [Header("----- Grenade Stats -----")]
+    [SerializeField] Transform throwPos;
+    [SerializeField] GameObject grenade;
+    [SerializeField] float grenadeCooldown;
 
-    int jumpCount;
-    int healthOriginal;
 
-    bool isShooting;
-    bool isSprinting;
+    Vector3 moveDirection, playerVelocity;
+
+    int jumpCount, healthOriginal;
+
+    float grenadeCooldownTimer;
+
+    bool isShooting, thrownGrenade, isSprinting;
 
     void Start()
     {
@@ -39,10 +44,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Update()
     {
-
         movement();
         sprint();
-
+        checkCooldowns();
     }
 
     void movement()
@@ -68,11 +72,17 @@ public class PlayerController : MonoBehaviour, IDamage
             playerVelocity = Vector3.zero;
         }
 
-        if (Input.GetButton("Fire1") && !isShooting)
+        if (!GameManager.instance.GetPauseState())
         {
-            StartCoroutine(shoot());
+            if (Input.GetButton("Fire1") && !isShooting)
+            {
+                StartCoroutine(shoot());
+            }
+            if (Input.GetButton("Grenade") && !thrownGrenade)
+            {
+                StartCoroutine(throwGrenade());
+            }
         }
-
     }
 
     void jump()
@@ -97,7 +107,14 @@ public class PlayerController : MonoBehaviour, IDamage
             isSprinting = false;
         }
     }
-
+    void checkCooldowns()
+    {
+        if (thrownGrenade)
+        {
+            grenadeCooldownTimer += Time.deltaTime;
+            GameManager.instance.GetGrenadeCooldownImage().fillAmount = grenadeCooldownTimer / grenadeCooldown;
+        }
+    }
     IEnumerator shoot()
     {
         isShooting = true;
@@ -107,6 +124,19 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
 
         isShooting = false;
+    }
+
+    IEnumerator throwGrenade()
+    {
+        thrownGrenade = true;
+
+        GameObject projectileGrenade = Instantiate(grenade, throwPos.position, transform.rotation);
+        projectileGrenade.GetComponent<Rigidbody>().velocity = playerVelocity;
+
+        yield return new WaitForSeconds(grenadeCooldown);
+
+        thrownGrenade = false;
+        grenadeCooldownTimer = 0.0f;
     }
 
     public void takeDamage(int amount)

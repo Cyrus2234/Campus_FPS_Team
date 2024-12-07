@@ -2116,7 +2116,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99a79f6de2825ec4bb471ef12eee8b52, type: 2}
+  - {fileID: 2100000, guid: e1eb634c482838147a8f9f789fdfb8c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2562,7 +2562,7 @@ MonoBehaviour:
   HP: 5
   faceTargetSpeed: 200
   fov: 165
-  bullet: {fileID: 8671275209460204849, guid: a8aaf7dedf25d5040a2071f76a90a861, type: 3}
+  bullet: {fileID: 5906735879997790850, guid: 027f401b2d4e57545a9ed5f09afb26f2, type: 3}
   shootRate: 2
 --- !u!95 &8754229461916496727
 Animator:

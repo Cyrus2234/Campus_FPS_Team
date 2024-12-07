@@ -34,8 +34,8 @@ public class enemyAi : MonoBehaviour, IDamage
     void Start()
     {
         animator = GetComponent<Animator>();
-       // colorOrig = model.material.color;
-       // GameManager.instance.updateGameGoal(1);
+        colorOrig = model.material.color;
+        GameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
@@ -111,7 +111,7 @@ public class enemyAi : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             // I'm Dead
-            //Gamemanager.instance.updateGameGoal(-1);
+            GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
