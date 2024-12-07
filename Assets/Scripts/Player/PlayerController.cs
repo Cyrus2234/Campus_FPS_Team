@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] Renderer model;
     [SerializeField] LayerMask ignoreMask;
 
     [Header("----- Stats -----")]
@@ -17,8 +18,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField][Range(15, 40)] int gravity;
 
     [Header("----- Gun Stats -----")]
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
+    [SerializeField] Transform shootPos;
+    [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
     Vector3 moveDirection;
@@ -101,17 +102,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isShooting = true;
 
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance, ~ignoreMask))
-        {
-            Debug.Log(hit.collider.name);
-            IDamage damage = hit.collider.GetComponent<IDamage>();
-            if (damage != null)
-            {
-                damage.takeDamage(shootDamage);
-            }
-        }
+        Instantiate(bullet, shootPos.position, transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
 
@@ -127,7 +118,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (health <= 0)
         {
-            GameManager.instance.Lose();
+            GameManager.instance.youLose();
         }
     }
     
