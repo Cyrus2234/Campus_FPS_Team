@@ -36,7 +36,7 @@ public class GrenadeDamage : MonoBehaviour
 #if UNITY_EDITOR
             Debug.Log("Is Trigger: " + other.isTrigger + "\tDamage: " + (dmg != null).ToString() + "\t Collider: " + other);
 #endif
-            if (!other.isTrigger && dmg != null && other is CapsuleCollider)
+            if (!other.isTrigger && dmg != null && ((other is CapsuleCollider && !other.CompareTag("Player")) || (other is CharacterController)))
             {
                 //Debug.Log(other.name);
                 dmg.takeDamage(damageAmount);

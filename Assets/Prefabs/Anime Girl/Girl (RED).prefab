@@ -1229,7 +1229,7 @@ MonoBehaviour:
   HP: 5
   faceTargetSpeed: 200
   fov: 165
-  bullet: {fileID: 8671275209460204849, guid: d3c22f52ff99f3c45ac7dcb68cbd380d, type: 3}
+  bullet: {fileID: 5906735879997790850, guid: 027f401b2d4e57545a9ed5f09afb26f2, type: 3}
   shootRate: 0.3
 --- !u!95 &3592936917443525200
 Animator:
