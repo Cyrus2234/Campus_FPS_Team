@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] Renderer model;
     [SerializeField] LayerMask ignoreMask;
 
     [Header("----- Stats -----")]
@@ -19,8 +20,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [Header("----- Gun Stats -----")]
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
 
     Vector3 moveDirection;
