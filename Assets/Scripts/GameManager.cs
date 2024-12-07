@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     // Member fields
     public static GameManager instance;
 
-    [SerializeField] bool isStartMenu;
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -36,13 +35,12 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         grenadeCooldown.fillAmount = 0;
-        hasFlag = false ;
-
+        hasFlag = false;
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !isStartMenu)
+        if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
             {
@@ -76,11 +74,22 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
     }
+    public void youLose()
+    {
+        Pause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
 
     // Accessors
     public GameObject GetPlayer()
     {
         return player;
+    }
+
+    public int GetGoalCount()
+    {
+        return goalCount;
     }
 
     public Image GetGrenadeCooldownImage()
@@ -91,6 +100,11 @@ public class GameManager : MonoBehaviour
     public bool GetPauseState()
     {
         return isPaused;
+    }
+
+    public bool checkFlagState()
+    {
+        return hasFlag;
     }
 
     // Mutators
@@ -112,21 +126,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void setHasFlagState(bool flagVal) 
+    public void setHasFlagState(bool flagVal)
     {
         hasFlag = flagVal;
     }
-
-    public bool checkFlagState()
-    {
-        return hasFlag;
-    }
-
-    public void youLose()
-    {
-        Pause();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
-    }
-
 }
