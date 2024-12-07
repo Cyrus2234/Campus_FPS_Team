@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButton("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
