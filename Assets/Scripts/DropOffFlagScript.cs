@@ -24,7 +24,7 @@ public class DropOffFlagScript : MonoBehaviour
         {
             if (GameManager.instance.checkFlagState())
             {
-                GameManager.instance.updateGameGoal(-1000);//Capturing flag is worth 1000 kills (change)
+                GameManager.instance.updateGameGoal(-GameManager.instance.GetGoalCount());//Capturing flag is worth 1000 kills (change)
                 Destroy(gameObject);
             }
 
