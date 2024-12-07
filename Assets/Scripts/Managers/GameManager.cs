@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,17 +9,24 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     GameObject player;
-    public PlayerMovement playerScript;
+    public PlayerController playerScript;
 
+    [Header("----- Menus -----")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
 
+    [Header("----- General UI -----")]
+    public Image playerHPBar;
+
+    public GameObject playerDamageScreen;
+
     float timeScale;
 
+    [Header("----- Bools -----")]
     bool isPaused;
-    bool isStartMenu;
+    public bool isStartMenu;
 
     int goalCount;
 
@@ -28,12 +36,12 @@ public class GameManager : MonoBehaviour
         timeScale = Time.timeScale;
         player = GameObject.FindWithTag("Player");
 
-        playerScript = player.GetComponent<PlayerMovement>();
+        playerScript = player.GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && !isStartMenu)
         {
             if (menuActive == null)
             {
@@ -84,4 +92,12 @@ public class GameManager : MonoBehaviour
     {
         goalCount += scoreToAdd;
     }
+
+    public void Lose()
+    {
+        Pause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
 }
