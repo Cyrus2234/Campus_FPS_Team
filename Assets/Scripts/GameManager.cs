@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     int goalCount;
 
+    bool hasFlag = false;
+
     void Awake()
     {
         instance = this;
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         grenadeCooldown.fillAmount = 0;
+        hasFlag = false ;
+
     }
 
     void Update()
@@ -107,6 +111,17 @@ public class GameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
     }
+
+    public void setHasFlagState(bool flagVal) 
+    {
+        hasFlag = flagVal;
+    }
+
+    public bool checkFlagState()
+    {
+        return hasFlag;
+    }
+
     public void youLose()
     {
         Pause();
