@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5034098601041162076}
   - component: {fileID: 7527960777628862465}
   m_Layer: 8
-  m_Name: Enemy Paintball
+  m_Name: Enemy Paintball BLK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rb: {fileID: 5034098601041162076}
-  damageAmount: 1
-  bulletSpeed: 5
+  damageAmount: 3
+  bulletSpeed: 263
   destoryTime: 3
 --- !u!33 &2071360758878405827
 MeshFilter:
@@ -82,7 +82,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3d40584bf30d5bc438d00a7be27ad6f7, type: 2}
+  - {fileID: 2100000, guid: 07814423d9b9c5145935241de56b99fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -225,7 +225,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.67058825, g: 0.098039225, b: 0.10196079, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
