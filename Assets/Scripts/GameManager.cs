@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text goalCountText;
+    [SerializeField] Image grenadeCooldown;
 
     GameObject player;
     public PlayerController playerScript;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         timeScale = Time.timeScale;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        grenadeCooldown.fillAmount = 0;
     }
 
     void Update()
@@ -75,6 +77,11 @@ public class GameManager : MonoBehaviour
     public GameObject GetPlayer()
     {
         return player;
+    }
+
+    public Image GetGrenadeCooldownImage()
+    {
+        return grenadeCooldown;
     }
 
     // Mutators

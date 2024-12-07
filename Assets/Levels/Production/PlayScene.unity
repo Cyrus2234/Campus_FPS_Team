@@ -134,13 +134,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1831575635514436537, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3091367153704800017, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3501993833715748725, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3548751708736710158, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: PlayScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180182723502298252, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6364570109776169238, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: m_Pivot.x
@@ -605,7 +617,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
+  - {fileID: 83870724}
   - {fileID: 505835661}
   - {fileID: 2707721623235272840}
   - {fileID: 1220347177}
-  - {fileID: 83870724}

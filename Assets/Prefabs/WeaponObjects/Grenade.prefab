@@ -60,8 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: -3877833937094903187}
   damageAmount: 7
-  speed: 5
-  destoryTime: 7
+  speed: 11
+  destoryTime: 6
   fallRate: 5
 --- !u!23 &6782232420586430242
 MeshRenderer:

@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     int jumpCount, healthOriginal;
 
+    float grenadeCooldownTimer;
+
     bool isShooting, thrownGrenade, isSprinting;
 
     void Start()
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         movement();
         sprint();
+        checkCooldowns();
     }
 
     void movement()
@@ -102,7 +105,14 @@ public class PlayerController : MonoBehaviour, IDamage
             isSprinting = false;
         }
     }
-
+    void checkCooldowns()
+    {
+        if (thrownGrenade)
+        {
+            grenadeCooldownTimer += Time.deltaTime;
+            GameManager.instance.GetGrenadeCooldownImage().fillAmount = grenadeCooldownTimer / grenadeCooldown;
+        }
+    }
     IEnumerator shoot()
     {
         isShooting = true;
@@ -124,6 +134,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(grenadeCooldown);
 
         thrownGrenade = false;
+        grenadeCooldownTimer = 0.0f;
     }
 
     public void takeDamage(int amount)
