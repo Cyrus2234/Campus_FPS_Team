@@ -228,6 +228,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &528504254 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5342919010220773139, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
+  m_PrefabInstance: {fileID: 7155427136213661559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &872990160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -476,6 +481,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!95 &1414298514 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8754229461916496727, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+  m_PrefabInstance: {fileID: 7108874766664625889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1833259588 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3592936917443525200, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
+  m_PrefabInstance: {fileID: 4852961893252614387}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4852961893252614387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,9 +539,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2069941510824387836, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4969363207005545059, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
       propertyPath: m_Name
       value: Girl (RED)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754608545038906696, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1833259588}
+    - target: {fileID: 7754608545038906696, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
+      propertyPath: roamDis
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754608545038906696, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
+      propertyPath: roamTimer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -541,6 +572,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 565401687741574187, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1414298514}
+    - target: {fileID: 565401687741574187, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: roamDis
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 565401687741574187, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: roamTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008464905783862173, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8150360645679214863, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
       propertyPath: m_Name
       value: Girl (BLK)
@@ -641,6 +688,22 @@ PrefabInstance:
     - target: {fileID: 4246205158460557885, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380074270331897667, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 528504254}
+    - target: {fileID: 4380074270331897667, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
+      propertyPath: roamDis
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380074270331897667, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
+      propertyPath: roamTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6262939895250724647, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
