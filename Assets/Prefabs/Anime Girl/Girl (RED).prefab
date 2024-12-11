@@ -1224,11 +1224,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1817013022698319331}
   agent: {fileID: 2069941510824387836}
+  anim: {fileID: 3592936917443525200}
   shootPos: {fileID: 5051630463015298931}
   headPos: {fileID: 5690366307999369940}
   HP: 5
   faceTargetSpeed: 200
   fov: 165
+  roamDis: 5
+  roamTimer: 1
+  aniSpeedTans: 2
   bullet: {fileID: 5906735879997790850, guid: 027f401b2d4e57545a9ed5f09afb26f2, type: 3}
   shootRate: 0.3
 --- !u!95 &3592936917443525200
@@ -1266,7 +1270,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1984,7 +1988,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300006, guid: d8e6717bd7507b44c9fc5a0a6749ec6c, type: 3}
+  m_Mesh: {fileID: 4300002, guid: d8e6717bd7507b44c9fc5a0a6749ec6c, type: 3}
   m_Bones:
   - {fileID: 7966630014720482568}
   - {fileID: 3866984586430608239}

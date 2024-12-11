@@ -805,11 +805,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1240159022857399046}
   agent: {fileID: 6262939895250724647}
+  anim: {fileID: 5342919010220773139}
   shootPos: {fileID: 5993595661338172103}
   headPos: {fileID: 5658358300893316960}
   HP: 5
   faceTargetSpeed: 200
   fov: 165
+  roamDis: 2
+  roamTimer: 1
+  aniSpeedTans: 2
   bullet: {fileID: 5906735879997790850, guid: 027f401b2d4e57545a9ed5f09afb26f2, type: 3}
   shootRate: 0.1
 --- !u!95 &5342919010220773139
@@ -847,7 +851,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

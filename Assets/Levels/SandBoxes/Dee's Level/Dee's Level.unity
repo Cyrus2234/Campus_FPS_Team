@@ -4257,7 +4257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069941510824387836, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
       propertyPath: m_StoppingDistance
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4969363207005545059, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
       propertyPath: m_Name
@@ -4506,7 +4506,7 @@ PrefabInstance:
       objectReference: {fileID: 5906735879997790850, guid: 5b63f4960d71b444e80b80044394060f, type: 3}
     - target: {fileID: 1008464905783862173, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
       propertyPath: m_StoppingDistance
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1041865051662661676, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
       propertyPath: m_Radius
