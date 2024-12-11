@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8754229461916496727, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4259,6 +4263,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3592936917443525200, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     - target: {fileID: 4969363207005545059, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
       propertyPath: m_Name
       value: Girl (RED) (1)
@@ -4504,6 +4512,10 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 5906735879997790850, guid: 5b63f4960d71b444e80b80044394060f, type: 3}
+    - target: {fileID: 565401687741574187, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: aniSpeedTans
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1008464905783862173, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
       propertyPath: m_StoppingDistance
       value: 10
@@ -4556,6 +4568,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8754229461916496727, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8191,6 +8207,10 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 5906735879997790850, guid: b7dffb201b25a1c4a837b7ff0e1c3654, type: 3}
+    - target: {fileID: 5342919010220773139, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8411,6 +8431,10 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 5906735879997790850, guid: b7dffb201b25a1c4a837b7ff0e1c3654, type: 3}
+    - target: {fileID: 5342919010220773139, guid: 8eee7a2b698410b46bae152d0139d1b8, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9175,6 +9199,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3592936917443525200, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     - target: {fileID: 4969363207005545059, guid: e966471de5b166e42ba4e7f89db04b7a, type: 3}
       propertyPath: m_Name
       value: Girl (RED)
@@ -9598,6 +9626,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8754229461916496727, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10657,6 +10689,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8754229461916496727, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
