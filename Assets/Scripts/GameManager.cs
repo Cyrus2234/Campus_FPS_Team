@@ -89,6 +89,12 @@ public class GameManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
+    public void ToLevelScreen()
+    {
+        menuActive.SetActive(false);
+        menuActive = menuLevelSelect;
+        menuActive.SetActive(true);
+    }
 
     // Accessors
     public GameObject GetPlayer()
@@ -138,12 +144,5 @@ public class GameManager : MonoBehaviour
     public void setHasFlagState(bool flagVal)
     {
         hasFlag = flagVal;
-    }
-
-    public void ToLevelScreen()
-    {
-        menuActive.SetActive(false);
-        menuActive = menuLevelSelect;
-        menuActive.SetActive(true);
     }
 }
