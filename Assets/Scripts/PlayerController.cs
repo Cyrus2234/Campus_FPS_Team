@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Start()
     {
+        grenadeCooldownTimer = grenadeCooldown;
         healthOriginal = health;
         updatePlayerUI();
     }
@@ -111,7 +112,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (thrownGrenade)
         {
-            grenadeCooldownTimer += Time.deltaTime;
+            grenadeCooldownTimer -= Time.deltaTime;
             GameManager.instance.GetGrenadeCooldownImage().fillAmount = grenadeCooldownTimer / grenadeCooldown;
         }
     }
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(grenadeCooldown);
 
         thrownGrenade = false;
-        grenadeCooldownTimer = 0.0f;
+        grenadeCooldownTimer = grenadeCooldown;
     }
 
     public void takeDamage(int amount)
