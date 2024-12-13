@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuStart;
+    [SerializeField] GameObject menuLevelSelect;
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] Image grenadeCooldown;
 
@@ -20,7 +22,9 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public Image playerHPBar;
     public GameObject playerDamageScreen;
+
     bool isPaused;
+    public bool isStartScreen;
 
     float timeScale;
 
@@ -36,6 +40,11 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         grenadeCooldown.fillAmount = 0;
         hasFlag = false;
+        if (isStartScreen)
+        {
+            menuActive = menuStart;
+            menuActive.SetActive(true);
+        }
     }
 
     void Update()
@@ -129,5 +138,12 @@ public class GameManager : MonoBehaviour
     public void setHasFlagState(bool flagVal)
     {
         hasFlag = flagVal;
+    }
+
+    public void ToLevelScreen()
+    {
+        menuActive.SetActive(false);
+        menuActive = menuLevelSelect;
+        menuActive.SetActive(true);
     }
 }
