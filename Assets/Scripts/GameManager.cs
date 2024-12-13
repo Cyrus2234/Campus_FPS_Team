@@ -9,11 +9,12 @@ public class GameManager : MonoBehaviour
     // Member fields
     public static GameManager instance;
 
-    [SerializeField] bool isStartMenu;
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuStart;
+    [SerializeField] GameObject menuLevelSelect;
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] Image grenadeCooldown;
 
@@ -21,7 +22,9 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public Image playerHPBar;
     public GameObject playerDamageScreen;
+
     bool isPaused;
+    public bool isStartScreen;
 
     float timeScale;
 
@@ -36,13 +39,17 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         grenadeCooldown.fillAmount = 0;
-        hasFlag = false ;
-
+        hasFlag = false;
+        if (isStartScreen)
+        {
+            menuActive = menuStart;
+            menuActive.SetActive(true);
+        }
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !isStartMenu)
+        if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
             {
@@ -76,11 +83,28 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
     }
+    public void youLose()
+    {
+        Pause();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+    public void ToLevelScreen()
+    {
+        menuActive.SetActive(false);
+        menuActive = menuLevelSelect;
+        menuActive.SetActive(true);
+    }
 
     // Accessors
     public GameObject GetPlayer()
     {
         return player;
+    }
+
+    public int GetGoalCount()
+    {
+        return goalCount;
     }
 
     public Image GetGrenadeCooldownImage()
@@ -91,6 +115,11 @@ public class GameManager : MonoBehaviour
     public bool GetPauseState()
     {
         return isPaused;
+    }
+
+    public bool checkFlagState()
+    {
+        return hasFlag;
     }
 
     // Mutators
@@ -112,21 +141,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void setHasFlagState(bool flagVal) 
+    public void setHasFlagState(bool flagVal)
     {
         hasFlag = flagVal;
     }
-
-    public bool checkFlagState()
-    {
-        return hasFlag;
-    }
-
-    public void youLose()
-    {
-        Pause();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
-    }
-
 }
