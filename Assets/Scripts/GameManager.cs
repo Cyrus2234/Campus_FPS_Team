@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuStart;
     [SerializeField] GameObject menuLevelSelect;
+    [SerializeField] GameObject reticle;
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] Image grenadeCooldown;
 
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        reticle.SetActive(false);
     }
 
     public void Unpause()
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+        reticle.SetActive(true);
         menuActive.SetActive(false);
         menuActive = null;
     }

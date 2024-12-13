@@ -169,6 +169,7 @@ MonoBehaviour:
   menuLose: {fileID: 4996993391045955309}
   menuStart: {fileID: 6435701194651839147}
   menuLevelSelect: {fileID: 4473153918089094400}
+  reticle: {fileID: 5926325365116518239}
   goalCountText: {fileID: 7558337315035212875}
   grenadeCooldown: {fileID: 6384426147994793265}
   playerScript: {fileID: 0}
