@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Levels/SandBoxes/Dee's Level/StartScreen.unity
+    path: Assets/Levels/Production/StartScreen.unity
     guid: fafda086edf312d4aa0399b03e44caf2
   - enabled: 1
-    path: Assets/Levels/Production/PlayScene.unity
+    path: Assets/Levels/Unused/PlayScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Levels/SandBoxes/Dee's Level/Dee's Level.unity
