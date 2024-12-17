@@ -1038,11 +1038,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   health: 10
-  speed: 3
-  sprintMod: 2
+  speed: 4
+  sprintMod: 3
   jumpMax: 1
   jumpSpeed: 10
   gravity: 27
+  stamina: 5
+  runDelay: 4
+  staminaUsage: 1
+  staminaRegen: 1
   shootPos: {fileID: 213887478434251449}
   bullet: {fileID: 4594282163597596818, guid: 61acdd76d6b4d1a4b82732550f059842, type: 3}
   shootRate: 0.25

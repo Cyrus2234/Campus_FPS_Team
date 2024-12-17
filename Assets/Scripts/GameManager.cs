@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     GameObject player;
     public PlayerController playerScript;
     public Image playerHPBar;
+    public Image playerStaminaBar;
+    public Image playerStaminaBack;
     public GameObject playerDamageScreen;
 
     bool isPaused;

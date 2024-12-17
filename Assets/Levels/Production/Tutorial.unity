@@ -7925,14 +7925,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7248884591891076510, guid: c2d552a92719e5c4aac09d41f1c1a04e, type: 3}
-      propertyPath: speed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7248884591891076510, guid: c2d552a92719e5c4aac09d41f1c1a04e, type: 3}
-      propertyPath: sprintMod
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7248884591891076510, guid: c2d552a92719e5c4aac09d41f1c1a04e, type: 3}
       propertyPath: grenadeCooldown
       value: 2
       objectReference: {fileID: 0}
