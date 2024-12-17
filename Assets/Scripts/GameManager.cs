@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     float timeScale;
 
     int goalCount;
+    int flagCount;
+    //int flagCurrentHeld;
 
     bool hasFlag = false;
 
@@ -109,6 +111,10 @@ public class GameManager : MonoBehaviour
     {
         return goalCount;
     }
+    public int GetFlagCount()
+    {
+        return goalCount;
+    }
 
     public Image GetGrenadeCooldownImage()
     {
@@ -120,10 +126,10 @@ public class GameManager : MonoBehaviour
         return isPaused;
     }
 
-    public bool checkFlagState()
-    {
-        return hasFlag;
-    }
+    //public bool checkFlagState()
+    //{
+    //    return hasFlag;
+    //}
 
     // Mutators
     public void SetPlayer(GameObject player)
@@ -144,8 +150,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void setHasFlagState(bool flagVal)
+    public void updateFlagGoal(int amount)
     {
-        hasFlag = flagVal;
+        flagCount += amount;
+        //goalCountText.text = flagCount.ToString("F0"); //TODO ADD GOAL COUNT TEXT
+
+    }
+
+    public bool FlagDropOffComplete()
+    {
+        bool toReturn = false;
+        if (flagCount <= 0)
+        {
+            toReturn = true;
+            Pause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+        return toReturn;
     }
 }
