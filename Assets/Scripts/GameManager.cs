@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] Image grenadeCooldown;
 
-    GameObject player;
+    public GameObject player;
     public PlayerController playerScript;
     public Image playerHPBar;
     public Image playerStaminaBar;
