@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 3129766156158603930}
   - component: {fileID: 1232498216521820938}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Basic paintball gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
