@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField][Range(15, 40)] int gravity;
 
     [Header("----- Gun Stats -----")]
+//    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+//    [SerializeField] GameObject gunModel;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -27,32 +29,48 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject grenade;
     [SerializeField] float grenadeCooldown;
 
+    [Header("----- Player Sounds -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField][Range(0, 1)] float audJumpVel;
+    [SerializeField] AudioClip[] audDmg;
+    [SerializeField][Range(0, 1)] float audDmgVel;
+    [SerializeField] AudioClip[] audStep;
+    [SerializeField][Range(0, 1)] float audStepVel;
 
     Vector3 moveDirection, playerVelocity;
 
-    int jumpCount, healthOriginal;
+    int jumpCount, healthOriginal, gunListPos;
 
     float grenadeCooldownTimer;
 
-    bool isShooting, thrownGrenade, isSprinting;
+    bool isShooting, isSprinting, isPlayingStep, thrownGrenade;
 
     void Start()
     {
+        grenadeCooldownTimer = grenadeCooldown;
         healthOriginal = health;
         updatePlayerUI();
     }
 
     void Update()
     {
-        movement();
+        if (!GameManager.instance.GetPauseState())
+        {
+            movement();
+            checkCooldowns();
+        }
         sprint();
-        checkCooldowns();
     }
 
     void movement()
     {
         if (controller.isGrounded)
         {
+            if (moveDirection.magnitude > 0.3f && !isPlayingStep)
+            {
+                StartCoroutine(playStep());
+            }
             jumpCount = 0;
             playerVelocity = Vector3.zero;
         }
@@ -91,6 +109,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVel);
         }
     }
 
@@ -111,7 +130,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (thrownGrenade)
         {
-            grenadeCooldownTimer += Time.deltaTime;
+            grenadeCooldownTimer -= Time.deltaTime;
             GameManager.instance.GetGrenadeCooldownImage().fillAmount = grenadeCooldownTimer / grenadeCooldown;
         }
     }
@@ -120,6 +139,8 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = true;
 
         Instantiate(bullet, shootPos.position, transform.rotation);
+
+        //aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
 
         yield return new WaitForSeconds(shootRate);
 
@@ -136,7 +157,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(grenadeCooldown);
 
         thrownGrenade = false;
-        grenadeCooldownTimer = 0.0f;
+        grenadeCooldownTimer = grenadeCooldown;
     }
 
     public void takeDamage(int amount)
@@ -145,6 +166,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         updatePlayerUI();
         StartCoroutine(flashScreenDamage());
+        aud.PlayOneShot(audDmg[Random.Range(0, audDmg.Length)], audDmgVel);
 
         if (health <= 0)
         {
@@ -167,6 +189,58 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         GameManager.instance.playerHPBar.fillAmount = (float)health / healthOriginal;
     }
-    
+
+    /*
+    public void getGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+
+        shootDamage = gun.shootDMG;
+        shootDist = gun.shootDist;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        {
+            gunListPos++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        {
+            gunListPos--;
+            changeGun();
+        }
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[gunListPos].shootDMG;
+        shootDist = gunList[gunListPos].shootDist;
+        shootRate = gunList[gunListPos].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+    */
+
+    IEnumerator playStep()
+    {
+        isPlayingStep = true;
+
+        aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVel);
+
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.5f);
+        else
+            yield return new WaitForSeconds(0.3f);
+
+        isPlayingStep = false;
+    }
 
 }

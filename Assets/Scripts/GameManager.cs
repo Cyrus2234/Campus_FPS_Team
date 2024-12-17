@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuStart;
+    [SerializeField] GameObject menuLevelSelect;
+    [SerializeField] GameObject reticle;
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] Image grenadeCooldown;
 
@@ -20,11 +23,15 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public Image playerHPBar;
     public GameObject playerDamageScreen;
+
     bool isPaused;
+    public bool isStartScreen;
 
     float timeScale;
 
     int goalCount;
+    int flagCount;
+    //int flagCurrentHeld;
 
     bool hasFlag = false;
 
@@ -36,6 +43,11 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         grenadeCooldown.fillAmount = 0;
         hasFlag = false;
+        if (isStartScreen)
+        {
+            menuActive = menuStart;
+            menuActive.SetActive(true);
+        }
     }
 
     void Update()
@@ -63,6 +75,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        reticle.SetActive(false);
     }
 
     public void Unpause()
@@ -71,6 +84,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = timeScale;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+        reticle.SetActive(true);
         menuActive.SetActive(false);
         menuActive = null;
     }
@@ -78,6 +92,12 @@ public class GameManager : MonoBehaviour
     {
         Pause();
         menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+    public void ToLevelScreen()
+    {
+        menuActive.SetActive(false);
+        menuActive = menuLevelSelect;
         menuActive.SetActive(true);
     }
 
@@ -88,6 +108,10 @@ public class GameManager : MonoBehaviour
     }
 
     public int GetGoalCount()
+    {
+        return goalCount;
+    }
+    public int GetFlagCount()
     {
         return goalCount;
     }
@@ -102,10 +126,10 @@ public class GameManager : MonoBehaviour
         return isPaused;
     }
 
-    public bool checkFlagState()
-    {
-        return hasFlag;
-    }
+    //public bool checkFlagState()
+    //{
+    //    return hasFlag;
+    //}
 
     // Mutators
     public void SetPlayer(GameObject player)
@@ -126,8 +150,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void setHasFlagState(bool flagVal)
+    public void updateFlagGoal(int amount)
     {
-        hasFlag = flagVal;
+        flagCount += amount;
+        //goalCountText.text = flagCount.ToString("F0"); //TODO ADD GOAL COUNT TEXT
+
+    }
+
+    public bool FlagDropOffComplete()
+    {
+        bool toReturn = false;
+        if (flagCount <= 0)
+        {
+            toReturn = true;
+            Pause();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+        return toReturn;
     }
 }

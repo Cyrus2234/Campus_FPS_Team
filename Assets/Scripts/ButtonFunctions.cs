@@ -36,4 +36,9 @@ public class ButtonFunctions : MonoBehaviour
 
         SceneManager.LoadScene(_scene);
     }
+
+    public void LevelSelection()
+    {
+        GameManager.instance.ToLevelScreen();
+    }
 }

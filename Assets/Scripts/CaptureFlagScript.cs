@@ -9,7 +9,7 @@ public class CaptureFlagScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.instance.updateFlagGoal(1); //Create for every flag generated
     }
 
     // Update is called once per frame
@@ -21,9 +21,16 @@ public class CaptureFlagScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(teamTag))
-        { 
-            GameManager.instance.setHasFlagState(true);
+        {
+
+            // Changing to be better...
+            GameManager.instance.updateFlagGoal(-1);
+            
             Destroy(gameObject);
+
+
+            //GameManager.instance.setHasFlagState(true);
+            //Destroy(gameObject);
         }
     }
 
