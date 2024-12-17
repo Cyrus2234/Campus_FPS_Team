@@ -22,10 +22,9 @@ public class DropOffFlagScript : MonoBehaviour
     {
         if (other.CompareTag(teamTag))
         {
-            if (GameManager.instance.checkFlagState())
+            if (GameManager.instance.FlagDropOffComplete())
             {
-                GameManager.instance.updateGameGoal(-GameManager.instance.GetGoalCount());//Capturing flag is worth 1000 kills (change)
-                Destroy(gameObject);
+                Destroy(gameObject); // For the pause menu to not hav a flag sticking out of it
             }
 
         }

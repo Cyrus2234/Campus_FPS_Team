@@ -16,8 +16,14 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField][Range(1, 3)] int jumpMax;
     [SerializeField][Range(5, 20)] int jumpSpeed;
     [SerializeField][Range(15, 40)] int gravity;
+    [SerializeField][Range(1, 10)] float stamina;
+    [SerializeField][Range(1, 10)] float runDelay;
+    [SerializeField][Range(1, 10)] float staminaUsage;
+    [SerializeField][Range(1, 10)] float staminaRegen;
 
     [Header("----- Gun Stats -----")]
+//    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+//    [SerializeField] GameObject gunModel;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -27,32 +33,57 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject grenade;
     [SerializeField] float grenadeCooldown;
 
+    [Header("----- Player Sounds -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField][Range(0, 1)] float audJumpVel;
+    [SerializeField] AudioClip[] audDmg;
+    [SerializeField][Range(0, 1)] float audDmgVel;
+    [SerializeField] AudioClip[] audStep;
+    [SerializeField][Range(0, 1)] float audStepVel;
 
     Vector3 moveDirection, playerVelocity;
 
-    int jumpCount, healthOriginal;
+    int jumpCount, healthOriginal, speedOriginal, gunListPos;
 
     float grenadeCooldownTimer;
+    float staminaMax;
+    float staminaPercentage;
+    float totalDelay;
 
-    bool isShooting, thrownGrenade, isSprinting;
+    bool isShooting, isSprinting, isPlayingStep, thrownGrenade;
+    bool hadRan;
 
     void Start()
     {
+        grenadeCooldownTimer = grenadeCooldown;
         healthOriginal = health;
+        speedOriginal = speed;
+        staminaMax = stamina;
+        staminaPercentage = stamina / staminaMax;
         updatePlayerUI();
+        updateStaminaUI();
     }
 
     void Update()
     {
-        movement();
-        sprint();
-        checkCooldowns();
+        if (!GameManager.instance.GetPauseState())
+        {
+            movement();
+            checkCooldowns();
+        }
+        staminaPercentage = stamina / staminaMax;
+        Sprint();
     }
 
     void movement()
     {
         if (controller.isGrounded)
         {
+            if (moveDirection.magnitude > 0.3f && !isPlayingStep)
+            {
+                StartCoroutine(playStep());
+            }
             jumpCount = 0;
             playerVelocity = Vector3.zero;
         }
@@ -91,27 +122,82 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVel);
         }
     }
 
-    void sprint()
+    public void updateStaminaUI()
     {
-        if (Input.GetButtonDown("Sprint"))
+        GameManager.instance.playerStaminaBar.fillAmount = stamina / staminaMax;
+        if (hadRan == true)
         {
-            speed *= sprintMod;
-            isSprinting = true;
+            GameManager.instance.playerStaminaBack.color = Color.grey;
         }
-        else if (Input.GetButtonUp("Sprint"))
+        else
         {
-            speed /= sprintMod;
-            isSprinting = false;
+            GameManager.instance.playerStaminaBack.color = Color.black;
         }
     }
+
+    void Sprint()
+    {
+        if (Input.GetButtonDown("Sprint") && hadRan == false && stamina >= 0)
+        {
+            speed = speedOriginal * sprintMod;
+            isSprinting = true;
+        }
+        else if (Input.GetButton("Sprint") && hadRan == false && stamina >= 0 && isSprinting == true)
+        {
+            stamina -= staminaUsage * Time.deltaTime;
+            updateStaminaUI();
+        }
+        else if (Input.GetButtonUp("Sprint"))// || stamina <= 0)
+        {
+            speed = speedOriginal;
+            isSprinting = false;
+            StartCoroutine(SprintDelay());
+        }
+        else if (stamina < staminaMax)
+        {
+            stamina += staminaRegen * Time.deltaTime;
+            if (stamina > staminaMax)
+            {
+                stamina = staminaMax;
+            }
+            updateStaminaUI();
+        }
+        if (stamina <= 0)
+        { 
+            StartCoroutine(NoStamina());
+        }
+    }
+
+    IEnumerator SprintDelay()
+    {
+        totalDelay = runDelay * (1 - staminaPercentage);
+        hadRan = true;
+
+        yield return new WaitForSeconds(totalDelay);
+
+        hadRan = false;
+    }
+
+    IEnumerator NoStamina()
+    {
+        speed = speedOriginal;
+        totalDelay = runDelay*2;
+        //hadRan = true;
+
+        yield return new WaitForSeconds(totalDelay);
+
+        hadRan = false;
+    }
+
     void checkCooldowns()
     {
         if (thrownGrenade)
         {
-            grenadeCooldownTimer += Time.deltaTime;
+            grenadeCooldownTimer -= Time.deltaTime;
             GameManager.instance.GetGrenadeCooldownImage().fillAmount = grenadeCooldownTimer / grenadeCooldown;
         }
     }
@@ -120,6 +206,8 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = true;
 
         Instantiate(bullet, shootPos.position, transform.rotation);
+
+        //aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
 
         yield return new WaitForSeconds(shootRate);
 
@@ -136,7 +224,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(grenadeCooldown);
 
         thrownGrenade = false;
-        grenadeCooldownTimer = 0.0f;
+        grenadeCooldownTimer = grenadeCooldown;
     }
 
     public void takeDamage(int amount)
@@ -145,6 +233,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         updatePlayerUI();
         StartCoroutine(flashScreenDamage());
+        aud.PlayOneShot(audDmg[Random.Range(0, audDmg.Length)], audDmgVel);
 
         if (health <= 0)
         {
@@ -167,6 +256,58 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         GameManager.instance.playerHPBar.fillAmount = (float)health / healthOriginal;
     }
-    
+
+    /*
+    public void getGunStats(gunStats gun)
+    {
+        gunList.Add(gun);
+        gunListPos = gunList.Count - 1;
+
+        shootDamage = gun.shootDMG;
+        shootDist = gun.shootDist;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && gunListPos < gunList.Count - 1)
+        {
+            gunListPos++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && gunListPos > 0)
+        {
+            gunListPos--;
+            changeGun();
+        }
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[gunListPos].shootDMG;
+        shootDist = gunList[gunListPos].shootDist;
+        shootRate = gunList[gunListPos].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[gunListPos].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[gunListPos].model.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+    */
+
+    IEnumerator playStep()
+    {
+        isPlayingStep = true;
+
+        aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVel);
+
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.5f);
+        else
+            yield return new WaitForSeconds(0.3f);
+
+        isPlayingStep = false;
+    }
 
 }
