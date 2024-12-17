@@ -227,7 +227,7 @@ MonoBehaviour:
   roamDis: 10
   roamTimer: 1
   aniSpeedTans: 2
-  bullet: {fileID: 5906735879997790850, guid: 027f401b2d4e57545a9ed5f09afb26f2, type: 3}
+  bullet: {fileID: 5906735879997790850, guid: 5b63f4960d71b444e80b80044394060f, type: 3}
   shootRate: 2
 --- !u!95 &3230897747168126700
 Animator:
