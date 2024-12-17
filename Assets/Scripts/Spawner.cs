@@ -19,7 +19,8 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.updateGameGoal(numberToSpawn);
+        //GameManager.instance.updateGameGoal(numberToSpawn); //RE-Add after changing enemy ai (Currently checked out)
+
     }
 
     // Update is called once per frame
