@@ -20,15 +20,20 @@ public class enemyAi : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
 
     Vector3 playerDir;
+    Vector3 teamDir;
+
+    Vector3 teamPos;
 
     private Animator animator;
 
     bool playerInRange;
+    bool teamInRange;
     bool isShooting;
 
     Color colorOrig;
 
     float angleToPlayer;
+    float angleToTeam;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +57,6 @@ public class enemyAi : MonoBehaviour, IDamage
         playerDir = GameManager.instance.GetPlayer().transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
-
         Debug.DrawRay(headPos.position, playerDir);
         RaycastHit hit;
 
@@ -74,6 +78,21 @@ public class enemyAi : MonoBehaviour, IDamage
                 }
                 return true;
             }
+             else if (hit.collider.CompareTag("Team") && getTeamAngle() <= fov)
+            {
+                agent.SetDestination(getTeamPos());
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    faceTargetTeam();
+                }
+
+                if (!isShooting)
+                {
+                    StartCoroutine(shoot());
+                }
+                return true;
+            }
         }
         return false;
     }
@@ -84,12 +103,25 @@ public class enemyAi : MonoBehaviour, IDamage
         transform.rotation = Quaternion.Lerp(transform.rotation, rot , Time.deltaTime * faceTargetSpeed);
     }
 
+    void faceTargetTeam()
+    {
+        Quaternion rot = Quaternion.LookRotation(new Vector3(teamDir.x, 0, teamDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-             animator.SetBool("IsMoving", true);
+            animator.SetBool("IsMoving", true);
+        }
+        else if (other.CompareTag("Team"))
+        {
+            teamInRange = true;
+            teamPos = other.transform.position;
+            teamDir = other.gameObject.transform.position - headPos.position;
+            angleToTeam = Vector3.Angle(teamDir, transform.forward);
         }
     }
 
@@ -98,11 +130,28 @@ public class enemyAi : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-        animator.SetBool("IsMoving", false);
+            animator.SetBool("IsMoving", false);
+        }
+        else if (other.CompareTag("Team"))
+        {
+            teamInRange= false;
         }
     }
 
+    Vector3 getTeamDirection()
+    {
+        return teamDir;
+    }
 
+    Vector3 getTeamPos()
+    {
+        return teamPos;
+    }
+
+    float getTeamAngle()
+    {
+        return angleToTeam;
+    }
 
     public void takeDamage(int amount)
     {

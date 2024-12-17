@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public Image playerStaminaBack;
     public GameObject playerDamageScreen;
 
+    public GameObject[] team;
+
     bool isPaused;
     public bool isStartScreen;
 
@@ -43,6 +45,9 @@ public class GameManager : MonoBehaviour
         timeScale = Time.timeScale;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+
+        team = GameObject.FindGameObjectsWithTag("Team");
+
         grenadeCooldown.fillAmount = 0;
         hasFlag = false;
         if (isStartScreen)
