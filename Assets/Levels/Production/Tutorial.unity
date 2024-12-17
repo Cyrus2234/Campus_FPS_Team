@@ -7888,10 +7888,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7248884591891076510, guid: c2d552a92719e5c4aac09d41f1c1a04e, type: 3}
-      propertyPath: grenadeCooldown
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
