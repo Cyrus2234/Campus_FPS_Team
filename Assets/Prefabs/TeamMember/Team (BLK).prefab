@@ -1849,6 +1849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 13700000, guid: 7e0043553097dc34e867f52b292bb164, type: 3}
   agent: {fileID: 5745038453807326463}
+  anim: {fileID: 7878204459158829330}
   shootPos: {fileID: 1746361268327283465}
   headPos: {fileID: 2642659856908559921}
   HP: 20
@@ -1858,7 +1859,7 @@ MonoBehaviour:
   roamTimer: 3
   animSpeedTran: 8
   bullet: {fileID: 4594282163597596818, guid: 61acdd76d6b4d1a4b82732550f059842, type: 3}
-  shootRate: 10
+  shootRate: 0.5
 --- !u!136 &5796664272814375698
 CapsuleCollider:
   m_ObjectHideFlags: 0

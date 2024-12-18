@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+    [SerializeField] int maxAmmo = 10;
+    [SerializeField] float reloadTime = 1;
+    private int currentAmmo;
 
     [Header("----- Throwable Object Stats -----")]
     [SerializeField] Transform throwPos;
@@ -61,6 +64,8 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         speedOriginal = speed;
         sprintSpeed = speed * sprintMod;
         staminaMax = stamina;
+        currentAmmo = maxAmmo;
+
         updatePlayerUI();
         updateStaminaUI();
     }
@@ -208,11 +213,19 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         isShooting = true;
 
         Instantiate(bullet, shootPos.position, transform.rotation);
+        --currentAmmo;
 
         //aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
 
-        yield return new WaitForSeconds(shootRate);
-
+        if (currentAmmo <= 0)
+        {
+            yield return new WaitForSeconds(reloadTime); //reload takes 4x longer (need field)
+            currentAmmo = maxAmmo;
+        }
+        else
+        {
+            yield return new WaitForSeconds(shootRate);
+        }
         isShooting = false;
     }
 

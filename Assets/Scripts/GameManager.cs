@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     int flagCount;
     //int flagCurrentHeld;
 
-    bool hasFlag;
+    //bool hasFlag;
 
     void Awake()
     {
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
         grenadeCooldown.fillAmount = 0;
-        hasFlag = false;
+        //hasFlag = false;
         if (isStartScreen)
         {
             menuActive = menuStart;
