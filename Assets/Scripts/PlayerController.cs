@@ -273,6 +273,11 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         GameManager.instance.playerHPBar.fillAmount = (float)health / healthOriginal;
     }
 
+    public void changeThrowable(GameObject throwable)
+    {
+        throwableObject = throwable;
+    }
+
     /*
     public void getGunStats(gunStats gun)
     {
