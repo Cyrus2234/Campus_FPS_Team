@@ -25,7 +25,8 @@ public class CaptureFlagScript : MonoBehaviour
 
             // Changing to be better...
             GameManager.instance.updateFlagGoal(-1);
-            
+            GameManager.instance.hasFlagUI.SetActive(true);
+
             Destroy(gameObject);
 
 

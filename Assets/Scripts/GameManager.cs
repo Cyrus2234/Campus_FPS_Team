@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] team;
     public GameObject[] enemy;
 
+    public GameObject hasFlagUI;
+
     bool isPaused;
     public GameObject playerStunScreen;
     public bool isStartScreen;
