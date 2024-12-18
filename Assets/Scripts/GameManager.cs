@@ -30,8 +30,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemy;
 
     bool isPaused;
+    public GameObject playerStunScreen;
     public bool isStartScreen;
 
+    int goalCount;
     float timeScale;
 
     int goalCount;

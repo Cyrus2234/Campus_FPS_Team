@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyAi : MonoBehaviour, IDamage
+public class enemyAi : MonoBehaviour, IDamage, IStunnable
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -33,9 +33,8 @@ public class enemyAi : MonoBehaviour, IDamage
     private Animator animator;
 
     bool playerInRange;
+    bool isShooting, isStunned, isRoaming;
     bool teamInRange;
-    bool isShooting;
-    bool isRoaming;
 
     Color colorOrig;
 
@@ -62,7 +61,7 @@ public class enemyAi : MonoBehaviour, IDamage
 
         anim.SetFloat("Speed", Mathf.MoveTowards(animSpeed, agentSpeed, Time.deltaTime * aniSpeedTans));
 
-        if (playerInRange && !canSeePlayer())
+        if (!isStunned && playerInRange && !canSeePlayer())
         {
             if (!isRoaming && agent.remainingDistance < 0.01f)
             {
@@ -70,7 +69,7 @@ public class enemyAi : MonoBehaviour, IDamage
             }
         }
 
-        if (teamInRange && canSeeTeam())
+        if (!isStunned && teamInRange && canSeeTeam())
         {
 
         }
@@ -236,6 +235,20 @@ public class enemyAi : MonoBehaviour, IDamage
         }
     }
 
+    public void stunObject(int stunTime)
+    {
+        StartCoroutine(stun(stunTime));
+    }
+
+    IEnumerator stun(int stunTime)
+    {
+        isStunned = true;
+
+        yield return new WaitForSeconds(stunTime);
+        
+        isStunned = false;
+    }
+
     IEnumerator shoot()
     {
         isShooting = true;
@@ -251,6 +264,4 @@ public class enemyAi : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
     }
-
-
 }

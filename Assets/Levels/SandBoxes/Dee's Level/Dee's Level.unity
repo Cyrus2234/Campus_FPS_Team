@@ -2295,18 +2295,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 2127841166634422401, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
-      propertyPath: m_Name
-      value: Next Level
-      objectReference: {fileID: 0}
-    - target: {fileID: 2981498743254672017, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: StartScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5879082189020575214, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: StartScreen
-      objectReference: {fileID: 0}
     - target: {fileID: 6364570109776169238, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
