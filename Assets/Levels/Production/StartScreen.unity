@@ -859,6 +859,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2240436554016190786, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3091367153704800017, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: isStartMenu
       value: 1
@@ -887,11 +891,19 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Dee's Level
       objectReference: {fileID: 0}
+    - target: {fileID: 3610238563813483011, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4187213887307674388, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -160
       objectReference: {fileID: 0}
     - target: {fileID: 4473153918089094400, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512188481109679160, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
