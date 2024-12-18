@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject objectToSpawn;
     [SerializeField] int numberToSpawn;
     [SerializeField] int spawnInterval;
-    [SerializeField] int spawnPerInterval = 1;
+    //[SerializeField] int spawnPerInterval = 1;
     [SerializeField] Transform[] spawnPositions;
 
     int spawnCount;
@@ -45,12 +45,12 @@ public class Spawner : MonoBehaviour
         isSpawning = true;
 
 
-        for (int i = 0; i < spawnPerInterval; ++i)
-        {
+        //for (int i = 0; i < spawnPerInterval; ++i)
+        //{
             int SpawnPositionChosen = Random.Range(0, spawnPositions.Length);
             Instantiate(objectToSpawn, spawnPositions[SpawnPositionChosen].position, spawnPositions[SpawnPositionChosen].rotation);
             spawnCount++;
-        }
+        //}
         
         yield return new WaitForSeconds(spawnInterval);
         isSpawning = false;
