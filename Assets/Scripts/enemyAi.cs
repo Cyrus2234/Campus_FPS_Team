@@ -49,6 +49,10 @@ public class enemyAi : MonoBehaviour, IDamage
         {
 
         }
+        if (teamInRange && canSeeTeam())
+        {
+
+        }
     }
 
     bool canSeePlayer()
@@ -78,22 +82,46 @@ public class enemyAi : MonoBehaviour, IDamage
                 }
                 return true;
             }
-             else if (hit.collider.CompareTag("Team") && getTeamAngle() <= fov)
-            {
-                agent.SetDestination(getTeamPos());
-
-                if (agent.remainingDistance < agent.stoppingDistance)
-                {
-                    faceTargetTeam();
-                }
-
-                if (!isShooting)
-                {
-                    StartCoroutine(shoot());
-                }
-                return true;
-            }
         }
+        
+        return false;
+    }
+
+    bool canSeeTeam()
+    {
+        foreach (GameObject teamMember in GameManager.instance.team)
+        {
+            if (teamMember == null) continue;
+
+            RaycastHit hit;
+
+            teamDir = teamMember.transform.position - headPos.position;
+            angleToTeam = Vector3.Angle(teamDir, transform.forward);
+
+            Debug.DrawRay(headPos.position, teamDir, Color.blue);
+
+            if (Physics.Raycast(headPos.position, teamDir, out hit))
+            {
+                if (hit.collider.CompareTag("Team") && angleToPlayer <= fov)
+                {
+
+                    agent.SetDestination(teamMember.transform.position);
+
+                    if (agent.remainingDistance < agent.stoppingDistance)
+                    {
+                        faceTargetTeam();
+                    }
+
+                    if (!isShooting)
+                    {
+                        StartCoroutine(shoot());
+                    }
+                    return true;
+                }
+            }
+
+        }
+
         return false;
     }
 
@@ -116,12 +144,9 @@ public class enemyAi : MonoBehaviour, IDamage
             playerInRange = true;
             animator.SetBool("IsMoving", true);
         }
-        else if (other.CompareTag("Team"))
+        if (other.CompareTag("Team"))
         {
             teamInRange = true;
-            teamPos = other.transform.position;
-            teamDir = other.gameObject.transform.position - headPos.position;
-            angleToTeam = Vector3.Angle(teamDir, transform.forward);
         }
     }
 
@@ -132,7 +157,7 @@ public class enemyAi : MonoBehaviour, IDamage
             playerInRange = false;
             animator.SetBool("IsMoving", false);
         }
-        else if (other.CompareTag("Team"))
+        if (other.CompareTag("Team"))
         {
             teamInRange= false;
         }
