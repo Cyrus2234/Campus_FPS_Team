@@ -20,18 +20,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image grenadeCooldown;
 
     GameObject player;
+
+    // TODO: make getters and setters for these
     public PlayerController playerScript;
     public Image playerHPBar;
     public GameObject playerDamageScreen;
-
-    bool isPaused;
+    public GameObject playerStunScreen;
     public bool isStartScreen;
 
-    float timeScale;
-
     int goalCount;
-
-    bool hasFlag = false;
+    float timeScale;
+    
+    bool isPaused;
+    bool hasFlag;
 
     void Awake()
     {

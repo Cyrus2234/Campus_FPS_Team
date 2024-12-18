@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyAi : MonoBehaviour, IDamage
+public class enemyAi : MonoBehaviour, IDamage, IStunnable
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -15,7 +15,6 @@ public class enemyAi : MonoBehaviour, IDamage
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int fov;
 
-
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
@@ -24,7 +23,7 @@ public class enemyAi : MonoBehaviour, IDamage
     private Animator animator;
 
     bool playerInRange;
-    bool isShooting;
+    bool isShooting, isStunned;
 
     Color colorOrig;
 
@@ -40,7 +39,7 @@ public class enemyAi : MonoBehaviour, IDamage
 
     // Update is called once per frame
     void Update()
-    {   if (playerInRange && canSeePlayer())
+    {   if (!isStunned && playerInRange && canSeePlayer())
         {
 
         }
@@ -51,7 +50,6 @@ public class enemyAi : MonoBehaviour, IDamage
 
         playerDir = GameManager.instance.GetPlayer().transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
 
         Debug.DrawRay(headPos.position, playerDir);
         RaycastHit hit;
@@ -102,8 +100,6 @@ public class enemyAi : MonoBehaviour, IDamage
         }
     }
 
-
-
     public void takeDamage(int amount)
     {
        HP -= amount;
@@ -114,6 +110,20 @@ public class enemyAi : MonoBehaviour, IDamage
             GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
+    }
+
+    public void stunObject(int stunTime)
+    {
+        StartCoroutine(stun(stunTime));
+    }
+
+    IEnumerator stun(int stunTime)
+    {
+        isStunned = true;
+
+        yield return new WaitForSeconds(stunTime);
+        
+        isStunned = false;
     }
 
     IEnumerator shoot()
@@ -130,6 +140,4 @@ public class enemyAi : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorOrig;
     }
-
-
 }

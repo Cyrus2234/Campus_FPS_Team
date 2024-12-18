@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IStunnable
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
@@ -24,10 +24,10 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
-    [Header("----- Grenade Stats -----")]
+    [Header("----- Throwable Object Stats -----")]
     [SerializeField] Transform throwPos;
-    [SerializeField] GameObject grenade;
-    [SerializeField] float grenadeCooldown;
+    [SerializeField] GameObject throwableObject;
+    [SerializeField] float throwableCooldown;
 
     [Header("----- Player Sounds -----")]
     [SerializeField] AudioSource aud;
@@ -42,13 +42,13 @@ public class PlayerController : MonoBehaviour, IDamage
 
     int jumpCount, healthOriginal, gunListPos;
 
-    float grenadeCooldownTimer;
+    float throwableCooldownTimer;
 
-    bool isShooting, isSprinting, isPlayingStep, thrownGrenade;
+    bool isShooting, isSprinting, isPlayingStep, thrownObject;
 
     void Start()
     {
-        grenadeCooldownTimer = grenadeCooldown;
+        throwableCooldownTimer = throwableCooldown;
         healthOriginal = health;
         updatePlayerUI();
     }
@@ -96,9 +96,9 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 StartCoroutine(shoot());
             }
-            if (Input.GetButton("Grenade") && !thrownGrenade)
+            if (Input.GetButton("Throwable") && !thrownObject)
             {
-                StartCoroutine(throwGrenade());
+                StartCoroutine(throwThrowable());
             }
         }
     }
@@ -128,10 +128,10 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     void checkCooldowns()
     {
-        if (thrownGrenade)
+        if (thrownObject)
         {
-            grenadeCooldownTimer -= Time.deltaTime;
-            GameManager.instance.GetGrenadeCooldownImage().fillAmount = grenadeCooldownTimer / grenadeCooldown;
+            throwableCooldownTimer -= Time.deltaTime;
+            GameManager.instance.GetGrenadeCooldownImage().fillAmount = throwableCooldownTimer / throwableCooldown;
         }
     }
     IEnumerator shoot()
@@ -147,17 +147,17 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    IEnumerator throwGrenade()
+    IEnumerator throwThrowable()
     {
-        thrownGrenade = true;
+        thrownObject = true;
 
-        GameObject projectileGrenade = Instantiate(grenade, throwPos.position, transform.rotation);
+        GameObject projectileGrenade = Instantiate(throwableObject, throwPos.position, transform.rotation);
         projectileGrenade.GetComponent<Rigidbody>().velocity = playerVelocity;
 
-        yield return new WaitForSeconds(grenadeCooldown);
+        yield return new WaitForSeconds(throwableCooldown);
 
-        thrownGrenade = false;
-        grenadeCooldownTimer = grenadeCooldown;
+        thrownObject = false;
+        throwableCooldownTimer = throwableCooldown;
     }
 
     public void takeDamage(int amount)
@@ -174,6 +174,20 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
     
+    public void stunObject(int stunTime)
+    {
+        StartCoroutine(stun(stunTime));
+    }
+
+    IEnumerator stun(int stunTime)
+    {
+        GameManager.instance.playerStunScreen.SetActive(true);
+
+        yield return new WaitForSeconds(stunTime);
+
+        GameManager.instance.playerStunScreen.SetActive(false);
+    }
+
     IEnumerator flashScreenDamage()
     {
         GameManager.instance.playerDamageScreen.SetActive(true);
