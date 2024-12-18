@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class enemyAi : MonoBehaviour, IDamage, IStunnable
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
+
+    [SerializeField] GameObject healthUI;
+    [SerializeField] Image hpBar;
 
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
@@ -20,9 +24,6 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
     [SerializeField] int roamTimer;
     [SerializeField] int aniSpeedTans;
 
-
-
-
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
 
@@ -31,6 +32,8 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
     Vector3 startingPos;
 
     private Animator animator;
+
+    int originalHP;
 
     bool playerInRange;
     bool isShooting, isStunned, isRoaming;
@@ -48,9 +51,11 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
     void Start()
     {
         colorOrig = model.material.color;
+        updateEnemyHPBar();
         GameManager.instance.updateGameGoal(1);
         startingPos = transform.position;
         stoppingDisOrg = agent.stoppingDistance;
+        originalHP = HP;
     }
 
     // Update is called once per frame
@@ -193,6 +198,7 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            
             //animator.SetBool("IsMoving", true);
         }
         if (other.CompareTag("Team"))
@@ -215,26 +221,36 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
             //animator.SetBool("IsMoving", false);
             agent.stoppingDistance = 0;
         }
+        healthUI.SetActive(false);
     }
 
     public void takeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(GameManager.instance.player.transform.position);
+
+        healthUI.SetActive(true);
+
+        if (agent.isActiveAndEnabled)
+            agent.SetDestination(GameManager.instance.player.transform.position);
+
+        updateEnemyHPBar();
 
         if (co != null)
-        StopCoroutine(co);
+            StopCoroutine(co);
 
         isRoaming = false;
         StartCoroutine(flashRed());
+
         if (HP <= 0)
         {
-            // I'm Dead
             GameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
-
+    void updateEnemyHPBar()
+    {
+        hpBar.fillAmount = (float)HP / originalHP;
+    }
     public void stunObject(int stunTime)
     {
         StartCoroutine(stun(stunTime));
