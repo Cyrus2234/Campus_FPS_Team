@@ -680,7 +680,7 @@ Transform:
   m_GameObject: {fileID: 1588959991042814427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.177, y: 1.279, z: -0.078}
+  m_LocalPosition: {x: -0.121, y: 1.279, z: -0.137}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1048,7 +1048,7 @@ MonoBehaviour:
   shootRate: 0.25
   throwPos: {fileID: 6205026108149753347}
   grenade: {fileID: 8957844712611109382, guid: 94b35f4586de4d443b06ca004b672478, type: 3}
-  grenadeCooldown: 5
+  grenadeCooldown: 2
   aud: {fileID: 3883227242404038128}
   audJump:
   - {fileID: 8300000, guid: 10d3b49853004f748b6c77f6ff20800c, type: 3}
@@ -1084,7 +1084,7 @@ Animator:
   m_GameObject: {fileID: 2853738537712680843}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7e0043553097dc34e867f52b292bb164, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3dbe492b80759cf408d83aed8e7c4d33, type: 2}
+  m_Controller: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

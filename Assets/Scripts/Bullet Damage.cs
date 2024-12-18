@@ -10,7 +10,7 @@ public class BulletDamage : MonoBehaviour
 
     //Bullet stats
     [SerializeField] int damageAmount;
-    [SerializeField] int bulletSpeed;
+    [SerializeField] float bulletSpeed;
     [SerializeField] int destoryTime;
 
 
