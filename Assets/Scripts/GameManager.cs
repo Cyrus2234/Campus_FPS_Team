@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     int goalCount;
     float timeScale;
 
-    int goalCount;
     int flagCount;
     //int flagCurrentHeld;
 
