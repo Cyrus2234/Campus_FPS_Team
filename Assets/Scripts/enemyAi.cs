@@ -22,8 +22,6 @@ public class enemyAi : MonoBehaviour, IDamage
     Vector3 playerDir;
     Vector3 teamDir;
 
-    Vector3 teamPos;
-
     private Animator animator;
 
     bool playerInRange;
@@ -161,21 +159,6 @@ public class enemyAi : MonoBehaviour, IDamage
         {
             teamInRange= false;
         }
-    }
-
-    Vector3 getTeamDirection()
-    {
-        return teamDir;
-    }
-
-    Vector3 getTeamPos()
-    {
-        return teamPos;
-    }
-
-    float getTeamAngle()
-    {
-        return angleToTeam;
     }
 
     public void takeDamage(int amount)

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerDamageScreen;
 
     public GameObject[] team;
+    public GameObject[] enemy;
 
     bool isPaused;
     public bool isStartScreen;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
 
         team = GameObject.FindGameObjectsWithTag("Team");
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
         grenadeCooldown.fillAmount = 0;
         hasFlag = false;
