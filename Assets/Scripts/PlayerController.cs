@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     [Header("----- Stats -----")]
     [SerializeField][Range(1, 10)] int health;
     [SerializeField][Range(1, 5)] int speed;
+    [SerializeField][Range(1, 5)] int crouchSpeed;
     [SerializeField][Range(2, 5)] int sprintMod;
     [SerializeField][Range(1, 3)] int jumpMax;
     [SerializeField][Range(5, 20)] int jumpSpeed;
@@ -44,23 +45,22 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
 
     Vector3 moveDirection, playerVelocity;
 
-    int jumpCount, healthOriginal, speedOriginal, gunListPos;
+    int jumpCount, healthOriginal, speedOriginal, gunListPos, sprintSpeed;
 
     float throwableCooldownTimer;
     float staminaMax;
     float staminaPercentage;
     float totalDelay;
 
-    bool isShooting, isSprinting, isPlayingStep, thrownGrenade, thrownObject;
-    bool hadRan;
+    bool isShooting, isSprinting, isPlayingStep, thrownObject, isCrouching, hasRan;
 
     void Start()
     {
         throwableCooldownTimer = throwableCooldown;
         healthOriginal = health;
         speedOriginal = speed;
+        sprintSpeed = speed * sprintMod;
         staminaMax = stamina;
-        staminaPercentage = stamina / staminaMax;
         updatePlayerUI();
         updateStaminaUI();
     }
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         controller.Move(moveDirection * speed * Time.deltaTime);
 
         jump();
+        crouch();
 
         controller.Move(playerVelocity * Time.deltaTime);
         playerVelocity.y -= gravity * Time.deltaTime;
@@ -126,72 +127,73 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         }
     }
 
+    void crouch()
+    {
+        if (Input.GetButtonDown("Crouch") && !isSprinting)
+        {
+            isCrouching = !isCrouching;
+            speed = isCrouching ? crouchSpeed : speedOriginal;
+        }
+    }
+
     public void updateStaminaUI()
     {
         GameManager.instance.playerStaminaBar.fillAmount = stamina / staminaMax;
-        if (hadRan == true)
-        {
-            GameManager.instance.playerStaminaBack.color = Color.grey;
-        }
-        else
-        {
-            GameManager.instance.playerStaminaBack.color = Color.black;
-        }
+        GameManager.instance.playerStaminaBack.color = hasRan ? Color.grey : Color.black;
     }
 
     void Sprint()
     {
-        if (Input.GetButtonDown("Sprint") && hadRan == false && stamina >= 0)
+        if (!isCrouching)
         {
-            speed = speedOriginal * sprintMod;
-            isSprinting = true;
+            if (Input.GetButtonDown("Sprint") && !hasRan && stamina > 0)
+            {
+                speed = sprintSpeed;
+                isSprinting = true;
+            }
+
+            if (Input.GetButtonUp("Sprint") || stamina <= 0)
+            {
+                speed = speedOriginal;
+                isSprinting = false;
+                StartCoroutine(SprintDelay());
+            }
         }
-        else if (Input.GetButton("Sprint") && hadRan == false && stamina >= 0 && isSprinting == true)
+        
+        if (Input.GetButton("Sprint") && isSprinting)
         {
             stamina -= staminaUsage * Time.deltaTime;
             updateStaminaUI();
         }
-        else if (Input.GetButtonUp("Sprint"))// || stamina <= 0)
-        {
-            speed = speedOriginal;
-            isSprinting = false;
-            StartCoroutine(SprintDelay());
-        }
-        else if (stamina < staminaMax)
+
+        if (!isSprinting && stamina < staminaMax)
         {
             stamina += staminaRegen * Time.deltaTime;
-            if (stamina > staminaMax)
-            {
-                stamina = staminaMax;
-            }
+            stamina = stamina > staminaMax ? staminaMax : stamina;
             updateStaminaUI();
-        }
-        if (stamina <= 0)
-        { 
-            StartCoroutine(NoStamina());
         }
     }
 
     IEnumerator SprintDelay()
     {
+        hasRan = true;
         totalDelay = runDelay * (1 - staminaPercentage);
-        hadRan = true;
 
         yield return new WaitForSeconds(totalDelay);
 
-        hadRan = false;
+        hasRan = false;
     }
 
-    IEnumerator NoStamina()
-    {
-        speed = speedOriginal;
-        totalDelay = runDelay*2;
-        //hadRan = true;
+    //IEnumerator NoStamina()
+    //{
+    //    speed = speedOriginal;
+    //    totalDelay = runDelay*2;
+    //    //hadRan = true;
 
-        yield return new WaitForSeconds(totalDelay);
+    //    yield return new WaitForSeconds(totalDelay);
 
-        hadRan = false;
-    }
+    //    hasRan = false;
+    //}
 
     void checkCooldowns()
     {
