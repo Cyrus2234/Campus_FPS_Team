@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 3048622469828538588}
   m_Layer: 7
   m_Name: Girl (BEIGE)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -678,7 +678,7 @@ Animator:
   m_GameObject: {fileID: 2567716425354358553}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7e0043553097dc34e867f52b292bb164, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3dbe492b80759cf408d83aed8e7c4d33, type: 2}
+  m_Controller: {fileID: 9100000, guid: feef16ef2ae59f148b395826a874a5db, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
@@ -705,7 +705,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0

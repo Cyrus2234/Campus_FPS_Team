@@ -199,6 +199,7 @@ public class enemyAi : MonoBehaviour, IDamage
         if (other.CompareTag("Team"))
         {
             teamInRange = true;
+            animator.SetBool("IsMoving", true);
         }
     }
 
@@ -212,6 +213,7 @@ public class enemyAi : MonoBehaviour, IDamage
         if (other.CompareTag("Team"))
         {
             teamInRange= false;
+            animator.SetBool("IsMoving", false);
             agent.stoppingDistance = 0;
         }
     }
