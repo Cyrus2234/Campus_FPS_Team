@@ -88,16 +88,28 @@ MonoBehaviour:
     m_Bits: 8
   health: 5
   speed: 3
+  crouchSpeed: 1
   sprintMod: 2
   jumpMax: 2
   jumpSpeed: 14
   gravity: 27
+  stamina: 1
+  runDelay: 1
+  staminaUsage: 1
+  staminaRegen: 1
   shootPos: {fileID: 5241195133161057539}
   bullet: {fileID: 4594282163597596818, guid: 61acdd76d6b4d1a4b82732550f059842, type: 3}
   shootRate: 0.25
   throwPos: {fileID: 5241195133161057539}
-  grenade: {fileID: 8957844712611109382, guid: 94b35f4586de4d443b06ca004b672478, type: 3}
-  grenadeCooldown: 1
+  throwableObject: {fileID: 0}
+  throwableCooldown: 0
+  aud: {fileID: 0}
+  audJump: []
+  audJumpVel: 0
+  audDmg: []
+  audDmgVel: 0
+  audStep: []
+  audStepVel: 0
 --- !u!33 &9112192097664729146
 MeshFilter:
   m_ObjectHideFlags: 0

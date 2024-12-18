@@ -26,12 +26,16 @@ public class GameManager : MonoBehaviour
     public Image playerStaminaBack;
     public GameObject playerDamageScreen;
 
+    public GameObject[] team;
+    public GameObject[] enemy;
+
     bool isPaused;
+    public GameObject playerStunScreen;
     public bool isStartScreen;
 
+    int goalCount;
     float timeScale;
 
-    int goalCount;
     int flagCount;
     //int flagCurrentHeld;
 
@@ -43,6 +47,10 @@ public class GameManager : MonoBehaviour
         timeScale = Time.timeScale;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+
+        team = GameObject.FindGameObjectsWithTag("Team");
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+
         grenadeCooldown.fillAmount = 0;
         hasFlag = false;
         if (isStartScreen)
