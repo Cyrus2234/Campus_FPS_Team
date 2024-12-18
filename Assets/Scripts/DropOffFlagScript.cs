@@ -24,6 +24,7 @@ public class DropOffFlagScript : MonoBehaviour
         {
             if (GameManager.instance.FlagDropOffComplete())
             {
+                GameManager.instance.hasFlagUI.SetActive(false);
                 Destroy(gameObject); // For the pause menu to not hav a flag sticking out of it
             }
 
