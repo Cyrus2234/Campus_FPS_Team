@@ -7,6 +7,7 @@ public class TeamAI : MonoBehaviour, IDamage
 {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
 
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
@@ -102,7 +103,7 @@ public class TeamAI : MonoBehaviour, IDamage
                         faceTargetTeam();
                     }
 
-                    if (!isShooting)
+                    if (!isShooting && agent.remainingDistance < agent.stoppingDistance)
                     {
                         StartCoroutine(shoot());
                     }

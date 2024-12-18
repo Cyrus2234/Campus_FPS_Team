@@ -194,12 +194,12 @@ public class enemyAi : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            animator.SetBool("IsMoving", true);
+            //animator.SetBool("IsMoving", true);
         }
         if (other.CompareTag("Team"))
         {
             teamInRange = true;
-            animator.SetBool("IsMoving", true);
+            //animator.SetBool("IsMoving", true);
         }
     }
 
@@ -208,12 +208,12 @@ public class enemyAi : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            animator.SetBool("IsMoving", false);
+            //animator.SetBool("IsMoving", false);
         }
         if (other.CompareTag("Team"))
         {
             teamInRange= false;
-            animator.SetBool("IsMoving", false);
+            //animator.SetBool("IsMoving", false);
             agent.stoppingDistance = 0;
         }
     }
