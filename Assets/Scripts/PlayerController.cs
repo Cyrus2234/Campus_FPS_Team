@@ -344,4 +344,8 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         isPlayingStep = false;
     }
 
+    public void SetBullet(GunStats GSBullet)
+    {
+        bullet = GSBullet.Model;
+    }
 }

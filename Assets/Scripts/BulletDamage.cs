@@ -38,4 +38,10 @@ public class BulletDamage : MonoBehaviour
         if (type == damageType.moving)
             Destroy(gameObject);
     }
+
+    public void GetGunStat(GunStats bullet)
+    {
+        damageAmount = bullet.GunDamage;
+        bulletSpeed = bullet.FireRate;
+    }
 }

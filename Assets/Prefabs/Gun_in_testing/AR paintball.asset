@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c74f12b1c1de0244925c82c00db25b5, type: 3}
-  m_Name: Temp-basic paintball gun
+  m_Name: AR paintball
   m_EditorClassIdentifier: 
-  Model: {fileID: 8408040752985126911, guid: 4779867131df9db46b325533bcd4555d, type: 3}
-  GunDamage: 1
-  FireRate: 10
+  Model: {fileID: 9127666837870997109, guid: 087215a256ea22842985b4bb7f3ad178, type: 3}
+  GunDamage: 3
+  FireRate: 50
   bulletDist: 100
   hitEffect: {fileID: 0}
   GunSound: []
