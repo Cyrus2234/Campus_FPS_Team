@@ -262,9 +262,11 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
     IEnumerator stun(int stunTime)
     {
         isStunned = true;
+        model.material.color = Color.white;
 
         yield return new WaitForSeconds(stunTime);
         
+        model.material.color = colorOrig;
         isStunned = false;
     }
 
