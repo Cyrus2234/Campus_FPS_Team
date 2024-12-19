@@ -1080,7 +1080,7 @@ MonoBehaviour:
   audStepVel: 0.05
   audShot:
   - {fileID: 8300000, guid: 121d1a75cb68892488ed0824ca09a134, type: 3}
-  audShotVel: 0
+  audShotVel: 0.05
 --- !u!95 &7971082085069459638
 Animator:
   serializedVersion: 5
