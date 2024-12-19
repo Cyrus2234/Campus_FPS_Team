@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     public void updateStaminaUI()
     {
         GameManager.instance.playerStaminaBar.fillAmount = stamina / staminaMax;
-        GameManager.instance.playerStaminaBack.color = hasRan ? Color.grey : Color.black;
+        GameManager.instance.playerStaminaBack.color = hasRan ? new Color(0.5f, 0.5f, 0.5f, 0.375f) : new Color(0, 0, 0, 0.375f);
     }
 
     void Sprint()
