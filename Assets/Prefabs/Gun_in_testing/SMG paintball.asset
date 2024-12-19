@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c74f12b1c1de0244925c82c00db25b5, type: 3}
-  m_Name: AR paintball
+  m_Name: SMG paintball
   m_EditorClassIdentifier: 
   Model: {fileID: 9127666837870997109, guid: 087215a256ea22842985b4bb7f3ad178, type: 3}
-  GunDamage: 2
-  FireRate: 20
-  bulletDist: 100
+  GunDamage: 1
+  FireRate: 50
+  bulletDist: 50
   hitEffect: {fileID: 0}
   GunSound: []
   GunSoundVol: 0

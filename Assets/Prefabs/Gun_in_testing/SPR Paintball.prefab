@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4831439004751182890}
   - component: {fileID: 8949600086138088894}
   m_Layer: 6
-  m_Name: AR Paintball
+  m_Name: SPR Paintball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rb: {fileID: 4831439004751182890}
-  damageAmount: 2
-  bulletSpeed: 20
+  damageAmount: 5
+  bulletSpeed: 1
   destoryTime: 2
 --- !u!33 &2636887151922547879
 MeshFilter:

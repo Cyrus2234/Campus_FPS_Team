@@ -3031,7 +3031,7 @@ MonoBehaviour:
   staminaUsage: 1
   staminaRegen: 1
   shootPos: {fileID: 213887479338051285}
-  bullet: {fileID: 9127666837870997109, guid: 087215a256ea22842985b4bb7f3ad178, type: 3}
+  bullet: {fileID: 9127666837870997109, guid: a926f309d4592254ca51f0ebd1ed80e7, type: 3}
   shootRate: 0.25
   maxAmmo: 10
   reloadTime: 1
