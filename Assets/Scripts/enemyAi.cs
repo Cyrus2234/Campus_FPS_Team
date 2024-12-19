@@ -66,19 +66,14 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
 
         anim.SetFloat("Speed", Mathf.MoveTowards(animSpeed, agentSpeed, Time.deltaTime * aniSpeedTans));
 
-        if (!isStunned && playerInRange && !canSeePlayer())
+        if (!isStunned && playerInRange && canSeePlayer())
         {
-            if (!isRoaming && agent.remainingDistance < 0.01f)
-            {
-                co = StartCoroutine(roam());
-            }
+            
         }
-
-        if (!isStunned && teamInRange && canSeeTeam())
+        else if (!isStunned && teamInRange && canSeeTeam())
         {
 
         }
-
         else if (!playerInRange)
         {
             if (!isRoaming && agent.remainingDistance < 0.01f)
@@ -99,9 +94,17 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
         randomPos += startingPos;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomPos, out hit, roamDis, 1);
-        agent.SetDestination(hit.position);
+        if (NavMesh.SamplePosition(randomPos, out hit, roamDis, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
 
+            while (Vector3.Distance(agent.transform.position, hit.position) > 15.0f)
+            {
+                yield return null;
+            }
+
+            agent.ResetPath();
+        }
         isRoaming = false;
 
     }

@@ -12651,6 +12651,7 @@ MonoBehaviour:
   throwables:
   - {fileID: 8957844712611109382, guid: 94b35f4586de4d443b06ca004b672478, type: 3}
   - {fileID: 8957844712611109382, guid: b4c9593db5cc1c04cb2d8ffac7154ac1, type: 3}
+  - {fileID: 5643044080171123200, guid: 3f736c981101d4741998d06e86a0d994, type: 3}
 --- !u!1 &8821005198965106263
 GameObject:
   m_ObjectHideFlags: 0

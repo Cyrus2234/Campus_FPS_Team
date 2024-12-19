@@ -52,7 +52,7 @@ MonoBehaviour:
   type: 0
   rb: {fileID: 6819104953693674813}
   damageAmount: 1
-  bulletSpeed: 10
+  bulletSpeed: 30
   destoryTime: 2
 --- !u!33 &2950283011611901805
 MeshFilter:
