@@ -227,12 +227,12 @@ MonoBehaviour:
   headPos: {fileID: 3693550343444829538}
   HP: 5
   faceTargetSpeed: 200
-  fov: 90
+  fov: 120
   roamDis: 10
-  roamTimer: 1
+  roamTimer: 5
   aniSpeedTans: 2
   bullet: {fileID: 5906735879997790850, guid: 5b63f4960d71b444e80b80044394060f, type: 3}
-  shootRate: 2
+  shootRate: 5
 --- !u!95 &3230897747168126700
 Animator:
   serializedVersion: 5
@@ -264,11 +264,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 10
+  m_StoppingDistance: 25
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1925,7 +1925,7 @@ Transform:
   m_GameObject: {fileID: 5795977554202156092}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.49999994, z: -0.4999999, w: 0.5000001}
-  m_LocalPosition: {x: -0.0029998878, y: 0.3375001, z: 0.38549992}
+  m_LocalPosition: {x: -0.003, y: 0.3375, z: 0.75027}
   m_LocalScale: {x: 0.5000001, y: 0.50000006, z: 0.5000002}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,3 +1,4 @@
+using Microsoft.Win32.SafeHandles;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,14 +24,15 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     [SerializeField][Range(1, 10)] float staminaRegen;
 
     [Header("----- Gun Stats -----")]
-//    [SerializeField] List<gunStats> gunList = new List<gunStats>();
-//    [SerializeField] GameObject gunModel;
+    //[SerializeField] List<gunStats> gunList = new List<gunStats>();
+    //[SerializeField] GameObject gunModel;
     [SerializeField] Transform shootPos;
-    [SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
-    [SerializeField] int maxAmmo = 10;
-    [SerializeField] float reloadTime = 1;
-    private int currentAmmo;
+    [SerializeField] GunStats shotType;
+
+    //[SerializeField] GameObject bullet;
+    //[SerializeField] float shootRate;
+    //[SerializeField] int maxAmmo;
+    //[SerializeField] float reloadTime;
 
     [Header("----- Throwable Object Stats -----")]
     [SerializeField] Transform throwPos;
@@ -47,26 +49,32 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     [SerializeField][Range(0, 1)] float audStepVel;
     [SerializeField] AudioClip[] audShot;
     [SerializeField][Range(0, 1)] float audShotVel;
+    [SerializeField] AudioClip[] audReload;
+    [SerializeField][Range(0, 1)] float audReloadVel;
+    [SerializeField] AudioClip[] audClick;
+    [SerializeField][Range(0, 1)] float audClickVel;
 
     Vector3 moveDirection, playerVelocity;
+    int jumpCount, healthOriginal, speedOriginal, gunListPos, sprintSpeed, currentAmmo;
+    float throwableCooldownTimer, staminaMax, staminaPercentage, totalDelay, reloadCooldownTimer, crouchOriginal, crouchHeight;
+    bool isShooting, isSprinting, isPlayingStep, thrownObject, isCrouching, hasRan, isReloading;
 
-    int jumpCount, healthOriginal, speedOriginal, gunListPos, sprintSpeed;
-
-    float throwableCooldownTimer;
-    float staminaMax;
-    float staminaPercentage;
-    float totalDelay;
-
-    bool isShooting, isSprinting, isPlayingStep, thrownObject, isCrouching, hasRan;
+    Coroutine reloading;
 
     void Start()
     {
+        if (GameManager.instance.isStartScreen)
+            return;
+
         throwableCooldownTimer = throwableCooldown;
+        reloadCooldownTimer = shotType.reloadTime;
         healthOriginal = health;
         speedOriginal = speed;
+        crouchOriginal = controller.height;
+        crouchHeight = crouchOriginal / 2;
         sprintSpeed = speed * sprintMod;
         staminaMax = stamina;
-        currentAmmo = maxAmmo;
+        currentAmmo = shotType.maxAmmo;
 
         updatePlayerUI();
         updateStaminaUI();
@@ -74,6 +82,9 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
 
     void Update()
     {
+        if (GameManager.instance.isStartScreen)
+            return;
+
         if (!GameManager.instance.GetPauseState())
         {
             movement();
@@ -113,7 +124,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
 
         if (!GameManager.instance.GetPauseState())
         {
-            if (Input.GetButton("Fire1") && !isShooting)
+            if (Input.GetButton("Fire1") && !isShooting && !isReloading)
             {
                 StartCoroutine(shoot());
             }
@@ -130,7 +141,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVel);
+            playSound(audJump[Random.Range(0, audJump.Length)], audJumpVel);
         }
     }
 
@@ -140,13 +151,22 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         {
             isCrouching = !isCrouching;
             speed = isCrouching ? crouchSpeed : speedOriginal;
+            controller.height = isCrouching ? crouchHeight : crouchOriginal;
         }
     }
-
     public void updateStaminaUI()
     {
         GameManager.instance.playerStaminaBar.fillAmount = stamina / staminaMax;
         GameManager.instance.playerStaminaBack.color = hasRan ? new Color(0.5f, 0.5f, 0.5f, 0.375f) : new Color(0, 0, 0, 0.375f);
+    }
+    public void updateAmmoUI()
+    {
+        GameManager.instance.GetAmmoAmountImage().fillAmount = (float)currentAmmo / shotType.maxAmmo;
+        GameManager.instance.updateAmmoAmount(currentAmmo.ToString() + " / " + shotType.maxAmmo.ToString());
+    }
+    public void playSound(AudioClip sound, float vol = 0.15f)
+    {
+        aud.PlayOneShot(sound, vol);
     }
 
     void Sprint()
@@ -209,32 +229,48 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
             throwableCooldownTimer -= Time.deltaTime;
             GameManager.instance.GetGrenadeCooldownImage().fillAmount = throwableCooldownTimer / throwableCooldown;
         }
+        if (isReloading)
+        {
+            reloadCooldownTimer -= Time.deltaTime;
+            GameManager.instance.GetReloadCooldownImage().fillAmount = reloadCooldownTimer / shotType.reloadTime;
+        }
+    }
+    IEnumerator reloadAmmo()
+    {
+        isReloading = true;
+        playSound(audClick[Random.Range(0, audClick.Length)], audReloadVel);
+
+        yield return new WaitForSeconds(shotType.reloadTime); //reload takes 4x longer (need field)
+
+        playSound(audReload[Random.Range(0, audReload.Length)], audReloadVel);
+        isReloading = false;
+
+        currentAmmo = shotType.maxAmmo;
+        reloadCooldownTimer = shotType.reloadTime;
+
+        updateAmmoUI();
     }
     IEnumerator shoot()
     {
         isShooting = true;
 
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        Instantiate(shotType.bullet, shootPos.position, Camera.main.transform.rotation);
         --currentAmmo;
-
-        aud.PlayOneShot(audShot[Random.Range(0, audShot.Length)], audShotVel);
+        updateAmmoUI();
+        playSound(audShot[Random.Range(0, audShot.Length)], audShotVel);
 
         if (currentAmmo <= 0)
-        {
-            yield return new WaitForSeconds(reloadTime); //reload takes 4x longer (need field)
-            currentAmmo = maxAmmo;
-        }
-        else
-        {
-            yield return new WaitForSeconds(shootRate);
-        }
+            reloading = StartCoroutine(reloadAmmo());
+        
+        yield return new WaitForSeconds(shotType.shootRate);
+
         isShooting = false;
     }
-
     IEnumerator throwThrowable()
     {
         thrownObject = true;
 
+        playSound(audClick[Random.Range(0, audClick.Length)], audReloadVel);
         GameObject projectileGrenade = Instantiate(throwableObject, throwPos.position, transform.rotation);
         projectileGrenade.GetComponent<Rigidbody>().velocity = playerVelocity;
 
@@ -250,7 +286,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
 
         updatePlayerUI();
         StartCoroutine(flashScreenDamage());
-        aud.PlayOneShot(audDmg[Random.Range(0, audDmg.Length)], audDmgVel);
+        playSound(audDmg[Random.Range(0, audDmg.Length)], audDmgVel);
 
         if (health <= 0)
         {
@@ -280,17 +316,25 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
 
         GameManager.instance.playerDamageScreen.SetActive(false);
     }
-    
-
-    
     public void updatePlayerUI()
     {
         GameManager.instance.playerHPBar.fillAmount = (float)health / healthOriginal;
     }
-
     public void changeThrowable(GameObject throwable)
     {
         throwableObject = throwable;
+    }
+    public void changeBullet(GunStats newShotType)
+    {
+        currentAmmo = 0;
+        shotType = newShotType;
+
+        if (reloading != null)
+            StopCoroutine(reloading);
+        
+        reloadCooldownTimer = shotType.reloadTime;
+        GameManager.instance.GetReloadCooldownImage().fillAmount = reloadCooldownTimer / shotType.reloadTime;
+        reloading = StartCoroutine(reloadAmmo());
     }
 
     /*
@@ -336,7 +380,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     {
         isPlayingStep = true;
 
-        aud.PlayOneShot(audStep[Random.Range(0, audStep.Length)], audStepVel);
+        playSound(audStep[Random.Range(0, audStep.Length)], audStepVel);
 
         if (!isSprinting)
             yield return new WaitForSeconds(0.5f);

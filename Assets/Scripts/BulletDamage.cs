@@ -8,6 +8,8 @@ public class BulletDamage : MonoBehaviour
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;
 
+    [SerializeField] ParticleSystem splash;
+
     //Bullet stats
     [SerializeField] int damageAmount;
     [SerializeField] float bulletSpeed;
@@ -31,11 +33,10 @@ public class BulletDamage : MonoBehaviour
             return;
 
         IDamage dmg = other.GetComponent<IDamage>();
-
-        if(dmg != null)
-            dmg.takeDamage(damageAmount);
+        dmg?.takeDamage(damageAmount);
 
         if (type == damageType.moving)
             Destroy(gameObject);
+        Instantiate(splash, transform.position, Quaternion.identity);
     }
 }

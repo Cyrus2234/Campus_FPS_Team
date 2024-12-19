@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.5, y: 9, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5643044080171123200}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: fdd9b790eff3ea74d9c1ccf2c0db76bb, type: 3}
 --- !u!114 &7734909088576429789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +59,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 6367878963662253036}
-  smoke: {fileID: 7152922326679947679, guid: 7f013b34f7d53ba4fadef6602fae020f, type: 3}
+  smoke: {fileID: 5271527316895986690, guid: ffb35d748e6f0eb4b840ed07cfffa4a3, type: 3}
+  smokeSound:
+  - {fileID: 8300000, guid: 9c7b8a7e8d486854e8931d4af6562afe, type: 3}
   smokeTime: 5
   speed: 13
   destroyTime: 5
@@ -125,10 +127,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.05
+  m_Height: 0.15
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.015, z: 0}
 --- !u!135 &950718766370057065
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -148,7 +150,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 50
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &5389312951488587342
 TrailRenderer:

@@ -44,6 +44,7 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
     float angleToPlayer;
     float angleToTeam;
     float stoppingDisOrg;
+    float animSpeed;
 
     Coroutine co;
 
@@ -62,7 +63,7 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
     void Update()
     {
         float agentSpeed = agent.velocity.normalized.magnitude;
-        float animSpeed = anim.GetFloat("Speed");
+        animSpeed = anim.GetFloat("Speed");
 
         anim.SetFloat("Speed", Mathf.MoveTowards(animSpeed, agentSpeed, Time.deltaTime * aniSpeedTans));
 
@@ -98,12 +99,12 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
         {
             agent.SetDestination(hit.position);
 
-            while (Vector3.Distance(agent.transform.position, hit.position) > 15.0f)
-            {
-                yield return null;
-            }
+            //while (Vector3.Distance(agent.transform.position, hit.position) > 15.0f)
+            //{
+            //    yield return null;
+            //}
 
-            agent.ResetPath();
+            //agent.ResetPath();
         }
         isRoaming = false;
 
@@ -112,13 +113,13 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
     bool canSeePlayer()
     {
 
-        playerDir = GameManager.instance.player.transform.position - headPos.position;
+        playerDir = GameManager.instance.player.transform.position - shootPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
-        Debug.DrawRay(headPos.position, playerDir);
+        Debug.DrawRay(shootPos.position, playerDir);
         RaycastHit hit;
 
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        if (Physics.Raycast(shootPos.position, playerDir, out hit))
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
             {
@@ -130,7 +131,7 @@ public class enemyAi : MonoBehaviour, IDamage, IStunnable
                     faceTarget();
                 }
 
-                if (!isShooting)
+                if (!isShooting && animSpeed == 0)
                 {
                     StartCoroutine(shoot());
                 }

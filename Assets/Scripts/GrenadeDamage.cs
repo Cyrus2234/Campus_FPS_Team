@@ -5,6 +5,8 @@ using UnityEngine;
 public class GrenadeDamage : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
+    [SerializeField] ParticleSystem explosion;
+    [SerializeField] AudioClip[] explosionSound;
 
     [SerializeField][Range(1, 10)] int damageAmount;
     [SerializeField][Range(5, 15)] int speed;
@@ -43,5 +45,7 @@ public class GrenadeDamage : MonoBehaviour
             }
         }
         Destroy(gameObject);
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        GameManager.instance.playerScript.playSound(explosionSound[Random.Range(0, explosionSound.Length)]);
     }
 }

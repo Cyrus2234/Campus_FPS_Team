@@ -761,10 +761,10 @@ MonoBehaviour:
   faceTargetSpeed: 200
   fov: 90
   roamDis: 5
-  roamTimer: 1
+  roamTimer: 5
   aniSpeedTans: 2
   bullet: {fileID: 5906735879997790850, guid: 0610d4d7e51a4be4aaa22f9fc5880441, type: 3}
-  shootRate: 0.3
+  shootRate: 0.75
 --- !u!95 &3955732965377119894
 Animator:
   serializedVersion: 5
@@ -796,7 +796,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

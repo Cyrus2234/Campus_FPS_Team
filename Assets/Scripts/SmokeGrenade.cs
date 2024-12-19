@@ -6,6 +6,7 @@ public class SmokeGrenade : MonoBehaviour
 {
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] ParticleSystem smoke;
+    [SerializeField] AudioClip[] smokeSound;
 
     [SerializeField][Range(1, 5)] int smokeTime;
     [SerializeField][Range(5, 15)] int speed;
@@ -28,9 +29,9 @@ public class SmokeGrenade : MonoBehaviour
     {
 
         yield return new WaitForSeconds(destroyTime);
-        Instantiate(smoke, gameObject.transform);
-        yield return new WaitForSeconds(smokeTime);
 
         Destroy(gameObject);
+        Instantiate(smoke, transform.position, Quaternion.identity);
+        GameManager.instance.playerScript.playSound(smokeSound[Random.Range(0, smokeSound.Length)]);
     }
 }

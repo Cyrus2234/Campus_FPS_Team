@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject reticle;
     [SerializeField] TMP_Text goalCountText;
     [SerializeField] Image grenadeCooldown;
+    [SerializeField] TMP_Text ammoLabel;
+    [SerializeField] Image ammoAmount;
+    [SerializeField] Image reloadCooldown;
 
     [Header("----- Player -----")]
     public GameObject player;
@@ -48,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     bool isPaused;
     public GameObject playerStunScreen;
-    public bool isStartScreen;
+    public bool isStartScreen, isSceneCTF;
 
     int goalCount;
     float timeScale;
@@ -66,19 +69,25 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerGunColor = GameObject.FindWithTag("Player Gun");
 
+        loadoutShotTypeText.text = "Currently Selected: SMG";
         loadoutGunColorText.text = "Currently Selected: Teal";
-        loadoutThrowableText.text = "Currently Selected: Stun Grenade";
+        loadoutThrowableText.text = "Currently Selected: Grenade";
 
         team = GameObject.FindGameObjectsWithTag("Team");
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
 
         grenadeCooldown.fillAmount = 0;
+        ammoAmount.fillAmount = 1;
+        reloadCooldown.fillAmount = 0;
+
         //hasFlag = false;
         if (isStartScreen)
         {
             menuActive = menuStart;
             menuActive.SetActive(true);
         }
+        if (isSceneCTF)
+            goalCountText.text = "Capture the flag!";
     }
 
     void Update()
@@ -166,6 +175,10 @@ public class GameManager : MonoBehaviour
         menuLoadoutActive = loadoutGunColorMenu;
         menuLoadoutActive.SetActive(true);
     }
+    public void ChangeShotTypeText(string text)
+    {
+        loadoutShotTypeText.text = text;
+    }
     public void ChangeGunColorText(string text)
     {
         loadoutGunColorText.text = text;
@@ -203,6 +216,14 @@ public class GameManager : MonoBehaviour
     {
         return grenadeCooldown;
     }
+    public Image GetAmmoAmountImage()
+    {
+        return ammoAmount;
+    }
+    public Image GetReloadCooldownImage()
+    {
+        return reloadCooldown;
+    }
 
     public bool GetPauseState()
     {
@@ -222,6 +243,9 @@ public class GameManager : MonoBehaviour
 
     public void updateGameGoal(int amount)
     {
+        if (isSceneCTF)
+            return;
+
         goalCount += amount;
         goalCountText.text = goalCount.ToString("F0") + " Enemies Remaining";
 
@@ -231,6 +255,11 @@ public class GameManager : MonoBehaviour
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
+    }
+
+    public void updateAmmoAmount(string text)
+    {
+        ammoLabel.text = text;
     }
 
     public void updateFlagGoal(int amount)

@@ -1037,7 +1037,7 @@ MonoBehaviour:
   health: 10
   speed: 4
   crouchSpeed: 1
-  sprintMod: 3
+  sprintMod: 2
   jumpMax: 1
   jumpSpeed: 10
   gravity: 27
@@ -1046,12 +1046,9 @@ MonoBehaviour:
   staminaUsage: 1
   staminaRegen: 1
   shootPos: {fileID: 213887478434251449}
-  bullet: {fileID: 4594282163597596818, guid: 61acdd76d6b4d1a4b82732550f059842, type: 3}
-  shootRate: 0.25
-  maxAmmo: 10
-  reloadTime: 1
+  shotType: {fileID: 11400000, guid: cd6e9ed51ee7bcb49a445a3147a36a3c, type: 2}
   throwPos: {fileID: 6205026108149753347}
-  throwableObject: {fileID: 8957844712611109382, guid: b4c9593db5cc1c04cb2d8ffac7154ac1, type: 3}
+  throwableObject: {fileID: 8957844712611109382, guid: 94b35f4586de4d443b06ca004b672478, type: 3}
   throwableCooldown: 5
   aud: {fileID: 3883227242404038128}
   audJump:
@@ -1081,6 +1078,12 @@ MonoBehaviour:
   audShot:
   - {fileID: 8300000, guid: 121d1a75cb68892488ed0824ca09a134, type: 3}
   audShotVel: 0.05
+  audReload:
+  - {fileID: 8300000, guid: 3b04438e41d64c94a884c1df26317bb7, type: 3}
+  audReloadVel: 0.15
+  audClick:
+  - {fileID: 8300000, guid: 9c7b8a7e8d486854e8931d4af6562afe, type: 3}
+  audClickVel: 0.05
 --- !u!95 &7971082085069459638
 Animator:
   serializedVersion: 5

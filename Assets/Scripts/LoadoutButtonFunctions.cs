@@ -7,6 +7,8 @@ public class LoadoutButtonFunctions : MonoBehaviour
 {
     [SerializeField] Material[] colors;
     [SerializeField] GameObject[] throwables;
+    [SerializeField] GunStats[] shotTypes;
+
     enum Colors
     {
         Blue,
@@ -93,7 +95,22 @@ public class LoadoutButtonFunctions : MonoBehaviour
     }
     public void smokeBomb()
     {
-        GameManager.instance.ChangeThrowableText("Currently Selected: Smoke Grenade");
+        GameManager.instance.ChangeThrowableText("Currently Selected: Smoke Bomb");
         GameManager.instance.playerScript.changeThrowable(throwables[2]);
+    }
+    public void ar()
+    {
+        GameManager.instance.ChangeShotTypeText("Currently Selected: AR");
+        GameManager.instance.playerScript.changeBullet(shotTypes[0]);
+    }
+    public void smg()
+    {
+        GameManager.instance.ChangeShotTypeText("Currently Selected: SMG");
+        GameManager.instance.playerScript.changeBullet(shotTypes[1]);
+    }
+    public void sniper()
+    {
+        GameManager.instance.ChangeShotTypeText("Currently Selected: Sniper");
+        GameManager.instance.playerScript.changeBullet(shotTypes[2]);
     }
 }
