@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Team
   - Enemy
+  - Player Gun
   layers:
   - Default
   - TransparentFX
