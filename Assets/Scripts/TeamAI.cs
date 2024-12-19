@@ -154,17 +154,20 @@ public class TeamAI : MonoBehaviour, IDamage
 
         agent.stoppingDistance = 0;
 
-        Vector3 randomPos = UnityEngine.Random.insideUnitSphere * roamDist;
-        randomPos += startingPos;
-
-        Vector3 playerPos = GameManager.instance.GetPlayer().transform.position / roamDist;
-        playerPos += startingPos;
+        Vector3 playerPos = GameManager.instance.GetPlayer().transform.position;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(playerPos, out hit, roamDist, 1);
-        agent.SetDestination(hit.position);
+        if (NavMesh.SamplePosition(playerPos, out hit, roamDist, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
 
+            while (Vector3.Distance(agent.transform.position, hit.position) > 5.0f) 
+            {
+                yield return null; 
+            }
 
+            agent.ResetPath();
+        }
         isRoaming = false;
     }
 

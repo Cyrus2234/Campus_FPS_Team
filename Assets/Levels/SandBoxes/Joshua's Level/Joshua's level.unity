@@ -417,7 +417,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2034443958418254413, guid: 62da9dd15f69aad40ae61adb43257d01, type: 3}
       propertyPath: roamDist
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2034443958418254413, guid: 62da9dd15f69aad40ae61adb43257d01, type: 3}
       propertyPath: aniSpeedTans
