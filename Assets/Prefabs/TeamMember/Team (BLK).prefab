@@ -1855,9 +1855,9 @@ MonoBehaviour:
   HP: 20
   faceTargetSpeed: 5
   fov: 90
-  roamDist: 20
-  roamTimer: 3
-  animSpeedTran: 8
+  roamDist: 2
+  roamTimer: 1
+  aniSpeedTans: 2
   bullet: {fileID: 4594282163597596818, guid: 61acdd76d6b4d1a4b82732550f059842, type: 3}
   shootRate: 0.5
 --- !u!136 &5796664272814375698
