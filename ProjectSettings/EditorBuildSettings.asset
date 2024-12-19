@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Levels/Production/StartScreen.unity
+    path: Assets/Levels/Unused/StartScreen.unity
     guid: fafda086edf312d4aa0399b03e44caf2
   - enabled: 1
     path: Assets/Levels/Unused/PlayScene.unity
@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/SandBoxes/Dee's Level/Dee's Level.unity
     guid: dd251befe7537c24098f941e5b06c916
+  - enabled: 1
+    path: Assets/Levels/Production/TheStartScreen.unity
+    guid: bcc5bb09e55caf54c919adba65d71342
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 33c46afa72da66f4e82997a204e18a29, type: 3}
