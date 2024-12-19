@@ -214,7 +214,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     {
         isShooting = true;
 
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
         --currentAmmo;
 
         aud.PlayOneShot(audShot[Random.Range(0, audShot.Length)], audShotVel);
