@@ -415,14 +415,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2034443958418254413, guid: 62da9dd15f69aad40ae61adb43257d01, type: 3}
-      propertyPath: roamDist
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2034443958418254413, guid: 62da9dd15f69aad40ae61adb43257d01, type: 3}
-      propertyPath: aniSpeedTans
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6071555238634954685, guid: 62da9dd15f69aad40ae61adb43257d01, type: 3}
       propertyPath: m_Name
       value: Team (BLK)
