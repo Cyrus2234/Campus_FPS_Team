@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     [SerializeField][Range(0, 1)] float audDmgVel;
     [SerializeField] AudioClip[] audStep;
     [SerializeField][Range(0, 1)] float audStepVel;
-    [SerializeField] AudioClip[] audShot;
-    [SerializeField][Range(0, 1)] float audShotVel;
 
     Vector3 moveDirection, playerVelocity;
 
@@ -146,7 +144,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
     public void updateStaminaUI()
     {
         GameManager.instance.playerStaminaBar.fillAmount = stamina / staminaMax;
-        GameManager.instance.playerStaminaBack.color = hasRan ? new Color(0.5f, 0.5f, 0.5f, 0.375f) : new Color(0, 0, 0, 0.375f);
+        GameManager.instance.playerStaminaBack.color = hasRan ? Color.grey : Color.black;
     }
 
     void Sprint()
@@ -217,7 +215,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         Instantiate(bullet, shootPos.position, transform.rotation);
         --currentAmmo;
 
-        aud.PlayOneShot(audShot[Random.Range(0, audShot.Length)], audShotVel);
+        //aud.PlayOneShot(gunList[gunListPos].shootSound[Random.Range(0, gunList[gunListPos].shootSound.Length)], gunList[gunListPos].shootSoundVol);
 
         if (currentAmmo <= 0)
         {
@@ -346,8 +344,4 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
         isPlayingStep = false;
     }
 
-    public void SetBullet(GunStats GSBullet)
-    {
-        bullet = GSBullet.Model;
-    }
 }
