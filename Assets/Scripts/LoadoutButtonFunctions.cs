@@ -93,6 +93,7 @@ public class LoadoutButtonFunctions : MonoBehaviour
     }
     public void smokeBomb()
     {
-        GameManager.instance.ChangeThrowableText("Currently Selected: Not Implemented");
+        GameManager.instance.ChangeThrowableText("Currently Selected: Smoke Grenade");
+        GameManager.instance.playerScript.changeThrowable(throwables[2]);
     }
 }

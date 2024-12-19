@@ -1048,6 +1048,8 @@ MonoBehaviour:
   shootPos: {fileID: 213887478434251449}
   bullet: {fileID: 4594282163597596818, guid: 61acdd76d6b4d1a4b82732550f059842, type: 3}
   shootRate: 0.25
+  maxAmmo: 10
+  reloadTime: 1
   throwPos: {fileID: 6205026108149753347}
   throwableObject: {fileID: 8957844712611109382, guid: b4c9593db5cc1c04cb2d8ffac7154ac1, type: 3}
   throwableCooldown: 5
@@ -1076,6 +1078,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e50685b0dbe17b849bd57a0577e233ba, type: 3}
   - {fileID: 8300000, guid: 0c0876a6a1f33df40aa8775aad827cfa, type: 3}
   audStepVel: 0.05
+  audShot:
+  - {fileID: 8300000, guid: 121d1a75cb68892488ed0824ca09a134, type: 3}
+  audShotVel: 0.05
 --- !u!95 &7971082085069459638
 Animator:
   serializedVersion: 5
