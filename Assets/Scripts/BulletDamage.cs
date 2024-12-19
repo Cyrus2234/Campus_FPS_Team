@@ -39,10 +39,4 @@ public class BulletDamage : MonoBehaviour
             Destroy(gameObject);
     }
 
-    //gun stats applied to paintball
-    public void GetGunStat(GunStats bullet)
-    {
-        damageAmount = bullet.GunDamage;
-        bulletSpeed = bullet.FireRate;
-    }
 }
