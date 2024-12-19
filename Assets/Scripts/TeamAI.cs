@@ -57,8 +57,7 @@ public class TeamAI : MonoBehaviour, IDamage
 
         if (enemyInRange && canSeeEnemy()) 
         {
-            if (!isRoaming && agent.remainingDistance < 0.01f)
-                co = StartCoroutine(roam());
+            
         }
         else if (!enemyInRange)
         {
