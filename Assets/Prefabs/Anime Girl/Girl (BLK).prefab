@@ -232,7 +232,7 @@ MonoBehaviour:
   roamTimer: 5
   aniSpeedTans: 2
   bullet: {fileID: 5906735879997790850, guid: 5b63f4960d71b444e80b80044394060f, type: 3}
-  shootRate: 5
+  shootRate: 2
 --- !u!95 &3230897747168126700
 Animator:
   serializedVersion: 5

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 4594282163597596818, guid: fadc82dd213211848b2df7c58f239bfa, type: 3}
   maxAmmo: 20
-  shootRate: 0.75
+  shootRate: 0.3
   reloadTime: 2

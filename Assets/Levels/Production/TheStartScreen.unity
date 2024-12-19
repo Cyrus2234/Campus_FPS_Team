@@ -1546,7 +1546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8394803525288046482, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: m_text
-      value: Capture the Flag
+      value: Retrive the Flag
       objectReference: {fileID: 0}
     - target: {fileID: 8394803525288046482, guid: c9cf37bb3b1e9a94d804fcd5eb83934e, type: 3}
       propertyPath: m_fontSizeBase
