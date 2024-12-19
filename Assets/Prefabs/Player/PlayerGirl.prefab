@@ -905,7 +905,7 @@ GameObject:
   - component: {fileID: 4287923944109717468}
   m_Layer: 0
   m_Name: Decal logo
-  m_TagString: Untagged
+  m_TagString: Player Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

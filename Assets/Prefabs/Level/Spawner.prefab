@@ -224,9 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67642fc791007f84e94dc65d57f574fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 8150360645679214863, guid: bbca8c1617efa0841ba1adebe4ee842c, type: 3}
+  objectToSpawn: {fileID: 2567716425354358553, guid: ca74064e3fd17dc46a6779b74facf500, type: 3}
   numberToSpawn: 1
   spawnInterval: 1
-  spawnPerInterval: 1
   spawnPositions:
   - {fileID: 7133148907590659838}
