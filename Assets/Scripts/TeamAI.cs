@@ -15,9 +15,9 @@ public class TeamAI : MonoBehaviour, IDamage
     [SerializeField] int HP;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int fov;
-    [SerializeField] int roamDist;
+    [SerializeField] float roamDist;
     [SerializeField] int roamTimer;
-    [SerializeField] int animSpeedTran;
+    [SerializeField] int aniSpeedTans;
 
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -50,6 +50,11 @@ public class TeamAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        float agentSpeed = agent.velocity.normalized.magnitude;
+        float animSpeed = anim.GetFloat("Speed");
+
+        anim.SetFloat("Speed", Mathf.MoveTowards(animSpeed, agentSpeed, Time.deltaTime * aniSpeedTans));
+
         if (enemyInRange && canSeeEnemy()) 
         {
             if (!isRoaming && agent.remainingDistance < 0.01f)
@@ -152,8 +157,11 @@ public class TeamAI : MonoBehaviour, IDamage
         Vector3 randomPos = UnityEngine.Random.insideUnitSphere * roamDist;
         randomPos += startingPos;
 
+        Vector3 playerPos = GameManager.instance.GetPlayer().transform.position / roamDist;
+        playerPos += startingPos;
+
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
+        NavMesh.SamplePosition(playerPos, out hit, roamDist, 1);
         agent.SetDestination(hit.position);
 
 
