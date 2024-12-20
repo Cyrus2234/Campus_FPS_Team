@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour, IDamage, IStunnable
 
         updatePlayerUI();
         updateStaminaUI();
+        updateAmmoUI();
     }
 
     void Update()
